@@ -14,6 +14,10 @@
 		6BCF11151BB31D4700066186 /* Hasami_ShogiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCF11141BB31D4700066186 /* Hasami_ShogiUITests.swift */; };
 		6BCF112C1BB3305600066186 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BCF11281BB3305600066186 /* LaunchScreen.storyboard */; settings = {ASSET_TAGS = (); }; };
 		6BCF112D1BB3305600066186 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BCF112A1BB3305600066186 /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
+		6BCF112F1BB3310900066186 /* HSMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCF112E1BB3310900066186 /* HSMenuViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		6BCF11311BB331E700066186 /* HSNewGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCF11301BB331E700066186 /* HSNewGameViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		6BCF11331BB3324100066186 /* HSLeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCF11321BB3324100066186 /* HSLeaderboardViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		6BCF11351BB3341A00066186 /* HSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCF11341BB3341A00066186 /* HSSettingsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +51,10 @@
 		6BCF11161BB31D4700066186 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6BCF11291BB3305600066186 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6BCF112B1BB3305600066186 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
+		6BCF112E1BB3310900066186 /* HSMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSMenuViewController.swift; sourceTree = "<group>"; };
+		6BCF11301BB331E700066186 /* HSNewGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSNewGameViewController.swift; sourceTree = "<group>"; };
+		6BCF11321BB3324100066186 /* HSLeaderboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSLeaderboardViewController.swift; sourceTree = "<group>"; };
+		6BCF11341BB3341A00066186 /* HSSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSSettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +136,10 @@
 			isa = PBXGroup;
 			children = (
 				6BCF11271BB3303B00066186 /* Base.iproj */,
+				6BCF112E1BB3310900066186 /* HSMenuViewController.swift */,
+				6BCF11301BB331E700066186 /* HSNewGameViewController.swift */,
+				6BCF11321BB3324100066186 /* HSLeaderboardViewController.swift */,
+				6BCF11341BB3341A00066186 /* HSSettingsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -305,7 +317,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BCF11351BB3341A00066186 /* HSSettingsViewController.swift in Sources */,
 				6BCF10F21BB31D4600066186 /* HSAppDelegate.swift in Sources */,
+				6BCF112F1BB3310900066186 /* HSMenuViewController.swift in Sources */,
+				6BCF11331BB3324100066186 /* HSLeaderboardViewController.swift in Sources */,
+				6BCF11311BB331E700066186 /* HSNewGameViewController.swift in Sources */,
 				6BCF10FA1BB31D4600066186 /* Hasami_Shogi.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
