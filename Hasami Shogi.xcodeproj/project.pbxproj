@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B80BF661BB466D50017DD79 /* HSGameConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B80BF651BB466D50017DD79 /* HSGameConstants.swift */; settings = {ASSET_TAGS = (); }; };
 		6BCF10F21BB31D4600066186 /* HSAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCF10F11BB31D4600066186 /* HSAppDelegate.swift */; };
 		6BCF10FA1BB31D4600066186 /* Hasami_Shogi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6BCF10F81BB31D4600066186 /* Hasami_Shogi.xcdatamodeld */; };
 		6BCF10FC1BB31D4600066186 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BCF10FB1BB31D4600066186 /* Assets.xcassets */; };
@@ -18,6 +19,8 @@
 		6BCF11311BB331E700066186 /* HSNewGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCF11301BB331E700066186 /* HSNewGameViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		6BCF11331BB3324100066186 /* HSLeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCF11321BB3324100066186 /* HSLeaderboardViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		6BCF11351BB3341A00066186 /* HSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCF11341BB3341A00066186 /* HSSettingsViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		6BF2EEEE1BB45FB5008A6D5E /* HSGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF2EEED1BB45FB5008A6D5E /* HSGameViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		6BF2EEF01BB45FCC008A6D5E /* HSGameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF2EEEF1BB45FCC008A6D5E /* HSGameCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6B80BF651BB466D50017DD79 /* HSGameConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HSGameConstants.swift; path = "Hasami Shogi/Utils/HSGameConstants.swift"; sourceTree = SOURCE_ROOT; };
 		6BCF10EE1BB31D4600066186 /* Hasami Shogi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hasami Shogi.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BCF10F11BB31D4600066186 /* HSAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSAppDelegate.swift; sourceTree = "<group>"; };
 		6BCF10F91BB31D4600066186 /* Hasami_Shogi.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Hasami_Shogi.xcdatamodel; sourceTree = "<group>"; };
@@ -55,6 +59,8 @@
 		6BCF11301BB331E700066186 /* HSNewGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSNewGameViewController.swift; sourceTree = "<group>"; };
 		6BCF11321BB3324100066186 /* HSLeaderboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSLeaderboardViewController.swift; sourceTree = "<group>"; };
 		6BCF11341BB3341A00066186 /* HSSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSSettingsViewController.swift; sourceTree = "<group>"; };
+		6BF2EEED1BB45FB5008A6D5E /* HSGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSGameViewController.swift; sourceTree = "<group>"; };
+		6BF2EEEF1BB45FCC008A6D5E /* HSGameCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSGameCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +88,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B80BF641BB466A60017DD79 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				6B80BF651BB466D50017DD79 /* HSGameConstants.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		6BCF10E51BB31D4600066186 = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +123,7 @@
 				6BCF11231BB32FBC00066186 /* Views */,
 				6BCF11241BB32FC000066186 /* Models */,
 				6BCF11251BB32FCA00066186 /* Resources */,
+				6B80BF641BB466A60017DD79 /* Utils */,
 				6BCF11261BB32FD700066186 /* Supporting Files */,
 			);
 			path = "Hasami Shogi";
@@ -140,6 +155,7 @@
 				6BCF11301BB331E700066186 /* HSNewGameViewController.swift */,
 				6BCF11321BB3324100066186 /* HSLeaderboardViewController.swift */,
 				6BCF11341BB3341A00066186 /* HSSettingsViewController.swift */,
+				6BF2EEED1BB45FB5008A6D5E /* HSGameViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -147,6 +163,7 @@
 		6BCF11231BB32FBC00066186 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6BF2EEEF1BB45FCC008A6D5E /* HSGameCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -321,8 +338,11 @@
 				6BCF10F21BB31D4600066186 /* HSAppDelegate.swift in Sources */,
 				6BCF112F1BB3310900066186 /* HSMenuViewController.swift in Sources */,
 				6BCF11331BB3324100066186 /* HSLeaderboardViewController.swift in Sources */,
+				6B80BF661BB466D50017DD79 /* HSGameConstants.swift in Sources */,
 				6BCF11311BB331E700066186 /* HSNewGameViewController.swift in Sources */,
+				6BF2EEF01BB45FCC008A6D5E /* HSGameCollectionViewCell.swift in Sources */,
 				6BCF10FA1BB31D4600066186 /* Hasami_Shogi.xcdatamodeld in Sources */,
+				6BF2EEEE1BB45FB5008A6D5E /* HSGameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -549,6 +569,7 @@
 				6BCF111B1BB31D4700066186 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6BCF111C1BB31D4700066186 /* Build configuration list for PBXNativeTarget "Hasami ShogiTests" */ = {
 			isa = XCConfigurationList;
@@ -557,6 +578,7 @@
 				6BCF111E1BB31D4700066186 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6BCF111F1BB31D4700066186 /* Build configuration list for PBXNativeTarget "Hasami ShogiUITests" */ = {
 			isa = XCConfigurationList;
@@ -565,6 +587,7 @@
 				6BCF11211BB31D4700066186 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
