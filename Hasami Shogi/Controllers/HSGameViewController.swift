@@ -11,18 +11,33 @@ import UIKit
 /// The view controller responsible for playing the game
 class HSGameViewController: UIViewController {
     
-    var gameType : GameType!
-
+    var playerHasMadeFirstMove : Bool!
+    var pieceSelected : Bool!
+    
+    var pieceSelectedPosition : NSIndexPath!
+    
+    var gamePiecePositions : [[Int]]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set up the game board
+        
     }
+    
 }
+
+
 
 // MARK: - UICollectionViewDataSource
 extension HSGameViewController : UICollectionViewDataSource {
     
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return HSGameConstants.numberOfSections
+    }
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 81
+        return HSGameConstants.numberOfRows
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -34,6 +49,7 @@ extension HSGameViewController : UICollectionViewDataSource {
 extension HSGameViewController : UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
         let cell = collectionView.cellForItemAtIndexPath(indexPath)
         
         cell?.backgroundColor = UIColor.redColor()

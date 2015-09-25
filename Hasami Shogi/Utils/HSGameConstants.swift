@@ -16,8 +16,9 @@ enum GameType : Int {
 /// Holds all the contants for defining the gameplay
 class HSGameConstants: NSObject {
     
-    /// The size of the board to play the game on
-    static var boardSize = 81
+    /// The number of rows and cols for the game board
+    static var numberOfRows = 9
+    static var numberOfSections = 9
     
     
     /// The type of game to be played
