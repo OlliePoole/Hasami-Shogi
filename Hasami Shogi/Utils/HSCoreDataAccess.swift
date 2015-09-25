@@ -9,9 +9,14 @@
 import UIKit
 import CoreData
 
+/// A layer for providing basic access to core data
 class HSCoreDataAccess: NSObject {
     
-    static var managedObjectContext : NSManagedObjectContext!
+    static var managedObjectContext : NSManagedObjectContext! {
+        get {
+            return (UIApplication.sharedApplication().delegate as! HSAppDelegate).managedObjectContext
+        }
+    }
     
     /**
     Returns records from a table in the core data model
@@ -20,7 +25,7 @@ class HSCoreDataAccess: NSObject {
     
     - returns: The records from the model that match the tablename
     */
-    static func recordsFromTableWithTableName(tableName: String) -> Array<AnyObject> {
+    static func recordsFromTableWithTableName(tableName: String) -> Array<AnyObject>? {
         
         let fetchRequest = HSCoreDataAccess.fetchRequest(tableName)
         
@@ -36,7 +41,7 @@ class HSCoreDataAccess: NSObject {
     
     - returns: The records from the model matching the tablename and the predicate
     */
-    static func recordsFromTableWithTableName(tableName: String, predicate: NSPredicate) -> Array<AnyObject> {
+    static func recordsFromTableWithTableName(tableName: String, predicate: NSPredicate) -> Array<AnyObject>? {
         
         let fetchRequest = HSCoreDataAccess.fetchRequest(tableName)
         
