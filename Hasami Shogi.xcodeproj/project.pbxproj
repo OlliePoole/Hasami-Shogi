@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B0034ED1BB54D3600963FD6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0034EB1BB54D3600963FD6 /* User.swift */; settings = {ASSET_TAGS = (); }; };
+		6B0034EE1BB54D3600963FD6 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0034EC1BB54D3600963FD6 /* User+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		6B0034F01BB54D5100963FD6 /* HSCoreDataAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0034EF1BB54D5100963FD6 /* HSCoreDataAccess.swift */; settings = {ASSET_TAGS = (); }; };
 		6B80BF661BB466D50017DD79 /* HSGameConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B80BF651BB466D50017DD79 /* HSGameConstants.swift */; settings = {ASSET_TAGS = (); }; };
 		6BCF10F21BB31D4600066186 /* HSAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCF10F11BB31D4600066186 /* HSAppDelegate.swift */; };
 		6BCF10FA1BB31D4600066186 /* Hasami_Shogi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6BCF10F81BB31D4600066186 /* Hasami_Shogi.xcdatamodeld */; };
@@ -41,6 +44,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6B0034EB1BB54D3600963FD6 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		6B0034EC1BB54D3600963FD6 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		6B0034EF1BB54D5100963FD6 /* HSCoreDataAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSCoreDataAccess.swift; sourceTree = "<group>"; };
 		6B80BF651BB466D50017DD79 /* HSGameConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HSGameConstants.swift; path = "Hasami Shogi/Utils/HSGameConstants.swift"; sourceTree = SOURCE_ROOT; };
 		6BCF10EE1BB31D4600066186 /* Hasami Shogi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hasami Shogi.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BCF10F11BB31D4600066186 /* HSAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSAppDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				6B80BF651BB466D50017DD79 /* HSGameConstants.swift */,
+				6B0034EF1BB54D5100963FD6 /* HSCoreDataAccess.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -171,6 +178,8 @@
 		6BCF11241BB32FC000066186 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6B0034EB1BB54D3600963FD6 /* User.swift */,
+				6B0034EC1BB54D3600963FD6 /* User+CoreDataProperties.swift */,
 				6BCF10F81BB31D4600066186 /* Hasami_Shogi.xcdatamodeld */,
 			);
 			path = Models;
@@ -266,6 +275,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = HS;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = OliverPoole;
 				TargetAttributes = {
@@ -335,13 +345,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				6BCF11351BB3341A00066186 /* HSSettingsViewController.swift in Sources */,
+				6B0034F01BB54D5100963FD6 /* HSCoreDataAccess.swift in Sources */,
 				6BCF10F21BB31D4600066186 /* HSAppDelegate.swift in Sources */,
 				6BCF112F1BB3310900066186 /* HSMenuViewController.swift in Sources */,
 				6BCF11331BB3324100066186 /* HSLeaderboardViewController.swift in Sources */,
 				6B80BF661BB466D50017DD79 /* HSGameConstants.swift in Sources */,
 				6BCF11311BB331E700066186 /* HSNewGameViewController.swift in Sources */,
 				6BF2EEF01BB45FCC008A6D5E /* HSGameCollectionViewCell.swift in Sources */,
+				6B0034EE1BB54D3600963FD6 /* User+CoreDataProperties.swift in Sources */,
 				6BCF10FA1BB31D4600066186 /* Hasami_Shogi.xcdatamodeld in Sources */,
+				6B0034ED1BB54D3600963FD6 /* User.swift in Sources */,
 				6BF2EEEE1BB45FB5008A6D5E /* HSGameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -482,11 +495,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Hasami Shogi/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.OliverPoole.Hasami-Shogi";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Hasami Shogi-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -494,11 +510,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Hasami Shogi/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.OliverPoole.Hasami-Shogi";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Hasami Shogi-Bridging-Header.h";
 			};
 			name = Release;
 		};
