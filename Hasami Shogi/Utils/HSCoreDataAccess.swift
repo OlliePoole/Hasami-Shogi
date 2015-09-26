@@ -52,6 +52,40 @@ class HSCoreDataAccess: NSObject {
     
     
     /**
+    Creates a new user managed object instance
+    
+    - returns: The newly created user managed object
+    */
+    static func createUserEntity() -> NSManagedObject {
+        let userManagedObject = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: HSCoreDataAccess.managedObjectContext)
+        
+        return userManagedObject
+    }
+    
+    
+    /**
+    Saves the current context of Core Data
+    
+    - returns: True if the save was successful
+    */
+    static func saveContext() -> Bool {
+        
+        do {
+            if let managedObjectContext = managedObjectContext {
+                if managedObjectContext.hasChanges {
+                    try managedObjectContext.save()
+                    return true
+                }
+            }
+        }
+        catch {
+            print(error)
+        }
+        
+        return false
+    }
+    
+    /**
     Builds a Fetch Request object
     
     - parameter entityName: The name of the entity for the object
