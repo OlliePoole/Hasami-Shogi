@@ -167,65 +167,103 @@
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="Back Button" translatesAutoresizingMaskIntoConstraints="NO" id="8Zz-o3-qhg">
                                 <rect key="frame" x="20" y="20" width="37" height="23"/>
                             </imageView>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="Player 1 Button" translatesAutoresizingMaskIntoConstraints="NO" id="WdJ-Mw-Oc2">
-                                <rect key="frame" x="57" y="172" width="261" height="53"/>
-                            </imageView>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="Player 2 Button" translatesAutoresizingMaskIntoConstraints="NO" id="p6e-hy-LM3">
-                                <rect key="frame" x="57" y="246" width="261" height="53"/>
-                            </imageView>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="Start Game Button" translatesAutoresizingMaskIntoConstraints="NO" id="iIb-qV-1xI">
-                                <rect key="frame" x="57" y="571" width="261" height="53"/>
-                            </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="26" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6So-N8-efI">
-                                <rect key="frame" x="152" y="224" width="166" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="iQg-Wy-FHt" rowHeight="26" style="IBUITableViewCellStyleDefault" id="ssd-oP-kP0">
-                                        <rect key="frame" x="0.0" y="28" width="166" height="26"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ssd-oP-kP0" id="R3n-f6-LKc">
-                                            <rect key="frame" x="0.0" y="0.0" width="166" height="25"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iQg-Wy-FHt">
-                                                    <rect key="frame" x="15" y="0.0" width="136" height="25"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="26" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wcn-Bz-DIx">
-                                <rect key="frame" x="152" y="298" width="166" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="q6U-7I-Kcq" rowHeight="26" style="IBUITableViewCellStyleDefault" id="sIi-Zd-Cu8">
-                                        <rect key="frame" x="0.0" y="28" width="166" height="26"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sIi-Zd-Cu8" id="Kpm-kJ-Al2">
-                                            <rect key="frame" x="0.0" y="0.0" width="166" height="25"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="q6U-7I-Kcq">
-                                                    <rect key="frame" x="15" y="0.0" width="136" height="25"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q3y-Lr-oMb">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q3y-Lr-oMb" userLabel="Back Button Button">
                                 <rect key="frame" x="15" y="9" width="46" height="46"/>
                                 <connections>
                                     <action selector="popViewControllerButtonPressed:" destination="sCq-tV-dIz" eventType="touchUpInside" id="ieM-3K-8wM"/>
+                                </connections>
+                            </button>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="Player 2 Button" translatesAutoresizingMaskIntoConstraints="NO" id="p6e-hy-LM3" userLabel="Player 2 ImageView">
+                                <rect key="frame" x="57" y="246" width="261" height="53"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JBO-0f-ftB" userLabel="Player 2 Label">
+                                <rect key="frame" x="152" y="246" width="152" height="53"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vFc-ce-mWR" userLabel="Player 2 Button">
+                                <rect key="frame" x="57" y="246" width="261" height="53"/>
+                                <connections>
+                                    <action selector="selectUserButtonPressed:" destination="sCq-tV-dIz" eventType="touchUpInside" id="kBD-dD-VI8"/>
+                                </connections>
+                            </button>
+                            <tableView hidden="YES" clipsSubviews="YES" tag="2" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Wcn-Bz-DIx">
+                                <rect key="frame" x="57" y="298" width="261" height="191"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HSNewGameUserTableViewCell" textLabel="q6U-7I-Kcq" rowHeight="26" style="IBUITableViewCellStyleDefault" id="sIi-Zd-Cu8">
+                                        <rect key="frame" x="0.0" y="50" width="261" height="26"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sIi-Zd-Cu8" id="Kpm-kJ-Al2">
+                                            <rect key="frame" x="0.0" y="0.0" width="261" height="25"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="q6U-7I-Kcq">
+                                                    <rect key="frame" x="15" y="0.0" width="231" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="sCq-tV-dIz" id="wbC-BL-9eJ"/>
+                                    <outlet property="delegate" destination="sCq-tV-dIz" id="tKQ-UN-Ug7"/>
+                                </connections>
+                            </tableView>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="Player 1 Button" translatesAutoresizingMaskIntoConstraints="NO" id="WdJ-Mw-Oc2" userLabel="Player 1 ImageView">
+                                <rect key="frame" x="57" y="172" width="261" height="53"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5jI-yy-ic6" userLabel="Player 1 Name label">
+                                <rect key="frame" x="166" y="172" width="152" height="53"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GVe-cT-f8J" userLabel="Player 1 Button">
+                                <rect key="frame" x="57" y="172" width="261" height="53"/>
+                                <connections>
+                                    <action selector="selectUserButtonPressed:" destination="sCq-tV-dIz" eventType="touchUpInside" id="GZQ-vS-cuu"/>
+                                </connections>
+                            </button>
+                            <tableView hidden="YES" clipsSubviews="YES" tag="1" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="6So-N8-efI">
+                                <rect key="frame" x="57" y="224" width="261" height="202"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HSNewGameUserTableViewCell" textLabel="iQg-Wy-FHt" rowHeight="26" style="IBUITableViewCellStyleDefault" id="ssd-oP-kP0">
+                                        <rect key="frame" x="0.0" y="50" width="261" height="26"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ssd-oP-kP0" id="R3n-f6-LKc">
+                                            <rect key="frame" x="0.0" y="0.0" width="261" height="25"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iQg-Wy-FHt">
+                                                    <rect key="frame" x="15" y="0.0" width="231" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="sCq-tV-dIz" id="jj0-00-vhs"/>
+                                    <outlet property="delegate" destination="sCq-tV-dIz" id="cLo-PH-0nQ"/>
+                                </connections>
+                            </tableView>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="Start Game Button" translatesAutoresizingMaskIntoConstraints="NO" id="iIb-qV-1xI" userLabel="Start Game ImageView">
+                                <rect key="frame" x="57" y="571" width="261" height="53"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eC5-qE-pOE" userLabel="Start Game Button">
+                                <rect key="frame" x="57" y="571" width="261" height="53"/>
+                                <connections>
+                                    <action selector="startGameButtonPressed:" destination="sCq-tV-dIz" eventType="touchUpInside" id="JHx-Af-Xzt"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -233,6 +271,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="nKb-KT-5Qj"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="playerOneButton" destination="GVe-cT-f8J" id="Gks-8B-CWL"/>
+                        <outlet property="playerOneLabel" destination="5jI-yy-ic6" id="cgu-B4-8mz"/>
+                        <outlet property="playerOneTableView" destination="6So-N8-efI" id="GkO-F7-SaV"/>
+                        <outlet property="playerTwoButton" destination="vFc-ce-mWR" id="7x3-We-ag6"/>
+                        <outlet property="playerTwoLabel" destination="JBO-0f-ftB" id="uo2-E6-KKw"/>
+                        <outlet property="playerTwoTableView" destination="Wcn-Bz-DIx" id="JVj-rb-Bj8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sMX-cx-0n8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
