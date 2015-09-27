@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol HSRegisterUserViewControllerDelegate {
+    
+    func didFinishRegisteringUser(user: User)
+}
+
 class HSRegisterUserViewController: UIViewController {
 
 }
