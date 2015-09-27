@@ -284,10 +284,10 @@
             </objects>
             <point key="canvasLocation" x="1248.5" y="1229.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Register User View Controller-->
         <scene sceneID="o64-mh-ZXF">
             <objects>
-                <viewController id="9sD-2m-u2m" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HSRegisterUserViewController" id="9sD-2m-u2m" customClass="HSRegisterUserViewController" customModule="Hasami_Shogi" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DGn-KM-9AY"/>
                         <viewControllerLayoutGuide type="bottom" id="Jss-E3-giX"/>

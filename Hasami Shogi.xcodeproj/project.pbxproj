@@ -26,6 +26,7 @@
 		6BF2EEEE1BB45FB5008A6D5E /* HSGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF2EEED1BB45FB5008A6D5E /* HSGameViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		6BF2EEF01BB45FCC008A6D5E /* HSGameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF2EEEF1BB45FCC008A6D5E /* HSGameCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		6BF55D281BB6B08D0050497B /* HSDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF55D271BB6B08D0050497B /* HSDatabaseManager.swift */; settings = {ASSET_TAGS = (); }; };
+		6BFC12871BB7FCF400037012 /* HSRegisterUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFC12861BB7FCF400037012 /* HSRegisterUserViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		6BF2EEED1BB45FB5008A6D5E /* HSGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSGameViewController.swift; sourceTree = "<group>"; };
 		6BF2EEEF1BB45FCC008A6D5E /* HSGameCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSGameCollectionViewCell.swift; sourceTree = "<group>"; };
 		6BF55D271BB6B08D0050497B /* HSDatabaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSDatabaseManager.swift; sourceTree = "<group>"; };
+		6BFC12861BB7FCF400037012 /* HSRegisterUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSRegisterUserViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 				6BCF11321BB3324100066186 /* HSLeaderboardViewController.swift */,
 				6BCF11341BB3341A00066186 /* HSSettingsViewController.swift */,
 				6BF2EEED1BB45FB5008A6D5E /* HSGameViewController.swift */,
+				6BFC12861BB7FCF400037012 /* HSRegisterUserViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 				6BF2EEF01BB45FCC008A6D5E /* HSGameCollectionViewCell.swift in Sources */,
 				6B0034EE1BB54D3600963FD6 /* User+CoreDataProperties.swift in Sources */,
 				6BCF10FA1BB31D4600066186 /* Hasami_Shogi.xcdatamodeld in Sources */,
+				6BFC12871BB7FCF400037012 /* HSRegisterUserViewController.swift in Sources */,
 				6B0034ED1BB54D3600963FD6 /* User.swift in Sources */,
 				6BF2EEEE1BB45FB5008A6D5E /* HSGameViewController.swift in Sources */,
 			);
