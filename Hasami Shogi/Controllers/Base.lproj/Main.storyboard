@@ -182,16 +182,16 @@
                                     <action selector="startGameButtonPressed:" destination="sCq-tV-dIz" eventType="touchUpInside" id="JHx-Af-Xzt"/>
                                 </connections>
                             </button>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yQG-v8-CQ9" userLabel="Player 1 Container">
-                                <rect key="frame" x="57" y="81" width="261" height="255"/>
-                                <connections>
-                                    <segue destination="iwQ-8X-G9f" kind="embed" identifier="PlayerOnePlayerSelectionContainerViewController" id="Ncc-QU-U34"/>
-                                </connections>
-                            </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wc4-CK-saM" userLabel="Player 2 Container">
-                                <rect key="frame" x="57" y="163" width="261" height="255"/>
+                                <rect key="frame" x="57" y="308" width="261" height="255"/>
                                 <connections>
                                     <segue destination="iwQ-8X-G9f" kind="embed" identifier="PlayerTwoPlayerSelectionContainerViewController" id="vZp-hk-boq"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yQG-v8-CQ9" userLabel="Player 1 Container">
+                                <rect key="frame" x="57" y="55" width="261" height="255"/>
+                                <connections>
+                                    <segue destination="iwQ-8X-G9f" kind="embed" identifier="PlayerOnePlayerSelectionContainerViewController" id="Ncc-QU-U34"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -216,19 +216,69 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="Back Button" translatesAutoresizingMaskIntoConstraints="NO" id="0u6-1Z-YTt">
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="Back Button" translatesAutoresizingMaskIntoConstraints="NO" id="0u6-1Z-YTt" userLabel="Back Image">
                                 <rect key="frame" x="20" y="20" width="37" height="23"/>
                             </imageView>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="Person Button" translatesAutoresizingMaskIntoConstraints="NO" id="hjN-1R-0aL">
-                                <rect key="frame" x="148" y="90" width="78" height="78"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MMl-v6-pyr" userLabel="Back Button">
+                                <rect key="frame" x="15" y="12" width="46" height="42"/>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="9sD-2m-u2m" eventType="touchUpInside" id="JB0-HB-nkQ"/>
+                                </connections>
+                            </button>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="Person Button" translatesAutoresizingMaskIntoConstraints="NO" id="hjN-1R-0aL" userLabel="Person Image">
+                                <rect key="frame" x="148" y="87" width="78" height="78"/>
                             </imageView>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="Register Button" translatesAutoresizingMaskIntoConstraints="NO" id="F3C-wH-pn2">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jaI-4s-otx" userLabel="Person Button">
+                                <rect key="frame" x="132" y="90" width="111" height="72"/>
+                                <connections>
+                                    <action selector="updateProfileImageButtonPressed:" destination="9sD-2m-u2m" eventType="touchUpInside" id="vqK-L5-s14"/>
+                                </connections>
+                            </button>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="Register Button" translatesAutoresizingMaskIntoConstraints="NO" id="F3C-wH-pn2" userLabel="Register Image">
                                 <rect key="frame" x="57" y="569" width="261" height="53"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i9A-56-CK4" userLabel="Register Button">
+                                <rect key="frame" x="57" y="569" width="261" height="53"/>
+                                <connections>
+                                    <action selector="registerUserButtonPressed:" destination="9sD-2m-u2m" eventType="touchUpInside" id="Ssi-Fk-dpp"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UuJ-D9-BM8">
+                                <rect key="frame" x="83" y="220" width="209" height="30"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Enter a short bio..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8fi-8H-vpD">
+                                <rect key="frame" x="83" y="258" width="209" height="128"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="9sD-2m-u2m" id="8DZ-be-BGo"/>
+                                </connections>
+                            </textView>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="White Button" translatesAutoresizingMaskIntoConstraints="NO" id="Vrp-Ja-TjP">
+                                <rect key="frame" x="57" y="408" width="261" height="53"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G9K-oS-nBA">
+                                <rect key="frame" x="57" y="408" width="259" height="53"/>
+                                <state key="normal" title="Add from contacts">
+                                    <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="addFromContactsButtonPressed:" destination="9sD-2m-u2m" eventType="touchUpInside" id="fpM-Ng-RrU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.75" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="profileBioTextView" destination="8fi-8H-vpD" id="fvq-7q-bCQ"/>
+                        <outlet property="profileImageView" destination="hjN-1R-0aL" id="s8S-dE-7nT"/>
+                        <outlet property="profileUsernameTextField" destination="UuJ-D9-BM8" id="Z4Y-sl-CzH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OXq-lJ-rY0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -167,9 +167,9 @@
 		6BCF11221BB32FB600066186 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				6BD5BD4F1BB8647A004ABEDB /* Settings */,
-				6BD5BD4E1BB86474004ABEDB /* Leaderboard */,
 				6BD5BD4D1BB86470004ABEDB /* Game */,
+				6BD5BD4E1BB86474004ABEDB /* Leaderboard */,
+				6BD5BD4F1BB8647A004ABEDB /* Settings */,
 				6BCF11271BB3303B00066186 /* Base.iproj */,
 				6BCF112E1BB3310900066186 /* HSMenuViewController.swift */,
 			);
