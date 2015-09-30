@@ -66,7 +66,8 @@
                     <navigationItem key="navigationItem" title="Hasami Shogi" id="69k-0b-LRP">
                         <barButtonItem key="leftBarButtonItem" systemItem="compose" id="MRC-zr-i08">
                             <connections>
-                                <segue destination="4cD-lF-NSm" kind="modal" id="GWl-H7-h1r"/>
+                                <action selector="presentMenuViewControllerButtonPressed:" destination="BYZ-38-t0r" id="unR-LX-Z7d"/>
+                                <segue destination="4cD-lF-NSm" kind="modal" identifier="HSMenuNavigationControllerSegue" id="Pet-aF-ahh"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="jXh-WC-Ger"/>
@@ -80,7 +81,7 @@
         <!--Navigation Controller-->
         <scene sceneID="XHh-jT-mYE">
             <objects>
-                <navigationController navigationBarHidden="YES" id="4cD-lF-NSm" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="HSMenuNavigationController" navigationBarHidden="YES" id="4cD-lF-NSm" sceneMemberID="viewController">
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cAP-CT-gnc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

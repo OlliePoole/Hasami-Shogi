@@ -24,7 +24,13 @@ class HSGameViewController: UIViewController {
         // Set up the game board
         
     }
-    
+        
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "HSMenuNavigationControllerSegue" {
+            let navController = segue.destinationViewController
+            navController.modalPresentationStyle = .OverCurrentContext
+        }
+    }
 }
 
 
