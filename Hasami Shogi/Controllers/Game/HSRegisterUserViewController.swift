@@ -19,12 +19,24 @@ protocol HSRegisterUserViewControllerDelegate {
     func didFinishRegisteringUser(user: User)
 }
 
-class HSRegisterUserViewController: UIViewController {
+class HSRegisterUserViewController: UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var profileUsernameTextField: UITextField!
     @IBOutlet weak var profileBioTextView: UITextView!
     
+    var delegate : HSRegisterUserViewControllerDelegate!
+    
+    var imagePicker : UIImagePickerController = UIImagePickerController()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("dismissKeyboard:"))
+        gestureRecognizer.numberOfTapsRequired = 1
+        
+        self.view.addGestureRecognizer(gestureRecognizer)
+    }
     
     @IBAction func backButtonPressed(sender: AnyObject) {
         self.navigationController?.popViewControllerAnimated(true)
@@ -34,6 +46,13 @@ class HSRegisterUserViewController: UIViewController {
     @IBAction func updateProfileImageButtonPressed(sender: UIButton) {
         // show the iphone photo library
         
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum) {
+            self.imagePicker.delegate = self
+            self.imagePicker.sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum
+            self.imagePicker.allowsEditing = false
+            
+            self.presentViewController(self.imagePicker, animated: true, completion: nil)
+        }
     }
 
     
@@ -58,7 +77,51 @@ class HSRegisterUserViewController: UIViewController {
     
     @IBAction func registerUserButtonPressed(sender: AnyObject) {
         // Validate the fields, then register the user and return
+        
+        if self.profileUsernameTextField.text?.isEmpty == false {
+            let username = self.profileUsernameTextField.text
+            
+            if self.profileBioTextView.text != "Enter a short bio..." {
+                let bio = self.profileBioTextView.text
+                
+                let image = self.profileImageView.image
+                if let image = image {
+                    let user = HSDatabaseManager.createUserWith(username!, bio: bio, profileImage: image)
+                    
+                    if let _ = user {
+                        // save was successful, return to player screen
+                        self.delegate.didFinishRegisteringUser(user!)
+                        
+                        self.navigationController?.popViewControllerAnimated(true)
+                    }
+                }
+            }
+        }
+        
+        // One of the if statements has failed - display an alert controller
+        displayErrorAlertController()
     }
+
+    
+    /**
+    Displays an alert controller with a generic error
+    */
+    func displayErrorAlertController () {
+        let alertController = UIAlertController(title: "Error", message: "One or more fields not complete", preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    /**
+    Dismisses the keyboard
+    
+    - parameter gestureRecognizer: The recognizer being fired
+    */
+    func dismissKeyboard(gestureRecognizer: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
 }
 
 extension HSRegisterUserViewController : UITextViewDelegate {
@@ -74,6 +137,14 @@ extension HSRegisterUserViewController : UITextViewDelegate {
         if textView.text == "" {
             textView.text = "Enter a short bio..."
         }
+    }
+}
+
+extension HSRegisterUserViewController : UIImagePickerControllerDelegate {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
+        self.profileImageView.image = image
     }
 }
 

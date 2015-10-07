@@ -24,6 +24,11 @@ class HSGameViewController: UIViewController {
         // Set up the game board
         
     }
+    
+    @IBAction func menuButtonPressed(sender: AnyObject) {
+        HSSideBarDelegateStore.delegate?.toggleSideBar(self)
+    }
+    
         
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "HSMenuNavigationControllerSegue" {

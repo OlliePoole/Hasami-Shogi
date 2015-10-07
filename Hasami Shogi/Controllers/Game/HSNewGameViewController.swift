@@ -50,8 +50,10 @@ extension HSNewGameViewController : HSPlayerSelectionContainerViewControllerDele
     func registerNewPlayer(sender: HSPlayerSelectionContainerViewController) {
         // push register viewController
         
-        let registerViewController = self.storyboard?.instantiateViewControllerWithIdentifier("HSRegisterUserViewController")
-        self.navigationController?.pushViewController(registerViewController!, animated: true)
+        let registerViewController = self.storyboard?.instantiateViewControllerWithIdentifier("HSRegisterUserViewController") as! HSRegisterUserViewController
+        registerViewController.delegate = self
+        
+        self.navigationController?.pushViewController(registerViewController, animated: true)
     }
 }
 

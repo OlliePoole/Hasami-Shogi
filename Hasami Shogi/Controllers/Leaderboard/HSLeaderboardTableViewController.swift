@@ -8,10 +8,11 @@
 
 import UIKit
 
-class HSLeaderboardViewController: UIViewController {
+class HSLeaderboardTableViewController: UITableViewController {
 
-    @IBAction func popViewControllerButtonPressed(sender: AnyObject) {
-        navigationController?.popViewControllerAnimated(true)
+    
+    @IBAction func menuButtonPressed(sender: AnyObject) {
+        HSSideBarDelegateStore.delegate?.toggleSideBar(self)
     }
     
 
