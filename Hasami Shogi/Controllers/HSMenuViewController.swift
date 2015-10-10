@@ -37,11 +37,10 @@ extension HSMenuViewController : UITableViewDataSource {
     }
 }
 
+//TODO: FIX THIS
 extension HSMenuViewController : UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        
         
         switch indexPath.section {
             
@@ -51,7 +50,7 @@ extension HSMenuViewController : UITableViewDelegate {
                 break
             }
             else {
-                let gameController = self.storyboard?.instantiateViewControllerWithIdentifier("HSMenuViewController") as! HSGameViewController
+                let gameController = self.storyboard?.instantiateViewControllerWithIdentifier("HSGameViewController") as! HSGameViewController
                 HSSideBarDelegateStore.delegate?.toggleSideBar(gameController)
             }
             

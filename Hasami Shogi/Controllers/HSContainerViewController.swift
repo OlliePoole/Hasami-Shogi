@@ -65,7 +65,11 @@ extension HSContainerViewController: HSSideBarDelegate {
         }
     }
     
+    
     func changeViewController(withNew viewController: UIViewController) {
+        
+        currentViewController!.view.removeFromSuperview()
+        containerNavigationController.view.removeFromSuperview()
         
         currentViewController = viewController
         containerNavigationController = UINavigationController(rootViewController: currentViewController)
@@ -80,7 +84,7 @@ extension HSContainerViewController: HSSideBarDelegate {
             menuViewController = self.storyboard?.instantiateViewControllerWithIdentifier("HSMenuViewController") as! HSMenuViewController
             
             // Set reference to the current view controller for the menu to use
-            self.menuViewController.menuContainer = sender
+            menuViewController.menuContainer = sender
             
             addChildSidePanelController(menuViewController!)
         }
@@ -117,12 +121,14 @@ extension HSContainerViewController: HSSideBarDelegate {
     func animateCenterPanelXPosition(targetPosition targetPosition: CGFloat, completion: ((Bool) -> Void)! = nil) {
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: { () -> Void in
             self.containerNavigationController.view.frame.origin.x = targetPosition
-            }, completion: completion)
+            
+            },
+            completion: completion)
     }
+    
     
     func showShadowForViewController(shouldShowShadow: Bool) {
         
         containerNavigationController.view.layer.shadowOpacity = shouldShowShadow ? 0.8 : 0.0
     }
-    
 }
