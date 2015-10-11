@@ -7,10 +7,15 @@
 //
 
 import Foundation
+import UIKit
 import CoreData
 
 class User: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
-
+    var profileImage : UIImage {
+        get {
+            return UIImage(named: "Homer Simpson")!
+        }
+    }
 }

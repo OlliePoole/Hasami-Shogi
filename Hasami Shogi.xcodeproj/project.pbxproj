@@ -13,9 +13,15 @@
 		6B0034EE1BB54D3600963FD6 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0034EC1BB54D3600963FD6 /* User+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
 		6B0034F01BB54D5100963FD6 /* HSCoreDataAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0034EF1BB54D5100963FD6 /* HSCoreDataAccess.swift */; settings = {ASSET_TAGS = (); }; };
 		6B225CBF1BB5A9E100122C3A /* HSCoreDataAccessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B225CBE1BB5A9E100122C3A /* HSCoreDataAccessTests.swift */; settings = {ASSET_TAGS = (); }; };
+		6B3731501BC921F80098C872 /* HSNewGameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B37314F1BC921F80098C872 /* HSNewGameTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		6B3731521BC927190098C872 /* HSThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3731511BC927190098C872 /* HSThemeManager.swift */; settings = {ASSET_TAGS = (); }; };
+		6B3731551BC92B1C0098C872 /* SanFranciscoText-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6B3731541BC927A20098C872 /* SanFranciscoText-Light.otf */; settings = {ASSET_TAGS = (); }; };
+		6B3731561BC92B200098C872 /* SanFranciscoText-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6B3731531BC927960098C872 /* SanFranciscoText-Bold.otf */; settings = {ASSET_TAGS = (); }; };
 		6B80BF661BB466D50017DD79 /* HSGameConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B80BF651BB466D50017DD79 /* HSGameConstants.swift */; settings = {ASSET_TAGS = (); }; };
 		6BA100C01BC52F8B009A2F56 /* HSGameBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA100BF1BC52F8B009A2F56 /* HSGameBoardViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		6BA100C21BC538B7009A2F56 /* HSGameBoardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA100C11BC538B7009A2F56 /* HSGameBoardCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		6BA135D01BCA66A40016ADA1 /* HSRegisterUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA135CF1BCA66A40016ADA1 /* HSRegisterUserTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		6BC76BC71BCAC228005F3C40 /* HSUserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC76BC61BCAC228005F3C40 /* HSUserProfileViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		6BCF10F21BB31D4600066186 /* HSAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCF10F11BB31D4600066186 /* HSAppDelegate.swift */; };
 		6BCF10FA1BB31D4600066186 /* Hasami_Shogi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6BCF10F81BB31D4600066186 /* Hasami_Shogi.xcdatamodeld */; };
 		6BCF10FC1BB31D4600066186 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BCF10FB1BB31D4600066186 /* Assets.xcassets */; };
@@ -29,8 +35,6 @@
 		6BCF11351BB3341A00066186 /* HSSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCF11341BB3341A00066186 /* HSSettingsTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		6BF2EEEE1BB45FB5008A6D5E /* HSGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF2EEED1BB45FB5008A6D5E /* HSGameViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		6BF55D281BB6B08D0050497B /* HSDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF55D271BB6B08D0050497B /* HSDatabaseManager.swift */; settings = {ASSET_TAGS = (); }; };
-		6BFC12871BB7FCF400037012 /* HSRegisterUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFC12861BB7FCF400037012 /* HSRegisterUserViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		6BFC12891BB800B700037012 /* HSPlayerSelectionContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFC12881BB800B700037012 /* HSPlayerSelectionContainerViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,9 +61,15 @@
 		6B0034EC1BB54D3600963FD6 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6B0034EF1BB54D5100963FD6 /* HSCoreDataAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSCoreDataAccess.swift; sourceTree = "<group>"; };
 		6B225CBE1BB5A9E100122C3A /* HSCoreDataAccessTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSCoreDataAccessTests.swift; sourceTree = "<group>"; };
+		6B37314F1BC921F80098C872 /* HSNewGameTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSNewGameTableViewCell.swift; sourceTree = "<group>"; };
+		6B3731511BC927190098C872 /* HSThemeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSThemeManager.swift; sourceTree = "<group>"; };
+		6B3731531BC927960098C872 /* SanFranciscoText-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SanFranciscoText-Bold.otf"; sourceTree = "<group>"; };
+		6B3731541BC927A20098C872 /* SanFranciscoText-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SanFranciscoText-Light.otf"; sourceTree = "<group>"; };
 		6B80BF651BB466D50017DD79 /* HSGameConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HSGameConstants.swift; path = "Hasami Shogi/Utils/HSGameConstants.swift"; sourceTree = SOURCE_ROOT; };
 		6BA100BF1BC52F8B009A2F56 /* HSGameBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSGameBoardViewController.swift; sourceTree = "<group>"; };
 		6BA100C11BC538B7009A2F56 /* HSGameBoardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSGameBoardCollectionViewCell.swift; sourceTree = "<group>"; };
+		6BA135CF1BCA66A40016ADA1 /* HSRegisterUserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSRegisterUserTableViewController.swift; sourceTree = "<group>"; };
+		6BC76BC61BCAC228005F3C40 /* HSUserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSUserProfileViewController.swift; sourceTree = "<group>"; };
 		6BCF10EE1BB31D4600066186 /* Hasami Shogi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hasami Shogi.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BCF10F11BB31D4600066186 /* HSAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSAppDelegate.swift; sourceTree = "<group>"; };
 		6BCF10F91BB31D4600066186 /* Hasami_Shogi.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Hasami_Shogi.xcdatamodel; sourceTree = "<group>"; };
@@ -79,8 +89,6 @@
 		6BCF11341BB3341A00066186 /* HSSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSSettingsTableViewController.swift; sourceTree = "<group>"; };
 		6BF2EEED1BB45FB5008A6D5E /* HSGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSGameViewController.swift; sourceTree = "<group>"; };
 		6BF55D271BB6B08D0050497B /* HSDatabaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSDatabaseManager.swift; sourceTree = "<group>"; };
-		6BFC12861BB7FCF400037012 /* HSRegisterUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSRegisterUserViewController.swift; sourceTree = "<group>"; };
-		6BFC12881BB800B700037012 /* HSPlayerSelectionContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSPlayerSelectionContainerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,8 +123,18 @@
 				6B0034EF1BB54D5100963FD6 /* HSCoreDataAccess.swift */,
 				6BF55D271BB6B08D0050497B /* HSDatabaseManager.swift */,
 				6B0009EE1BC405CB00CC1B65 /* HSSideBarDelegate.swift */,
+				6B3731511BC927190098C872 /* HSThemeManager.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		6BA135CE1BCA66600016ADA1 /* New Game */ = {
+			isa = PBXGroup;
+			children = (
+				6BCF11301BB331E700066186 /* HSNewGameViewController.swift */,
+				6BA135CF1BCA66A40016ADA1 /* HSRegisterUserTableViewController.swift */,
+			);
+			name = "New Game";
 			sourceTree = "<group>";
 		};
 		6BCF10E51BB31D4600066186 = {
@@ -188,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				6BA100C11BC538B7009A2F56 /* HSGameBoardCollectionViewCell.swift */,
+				6B37314F1BC921F80098C872 /* HSNewGameTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -205,6 +224,8 @@
 		6BCF11251BB32FCA00066186 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6B3731541BC927A20098C872 /* SanFranciscoText-Light.otf */,
+				6B3731531BC927960098C872 /* SanFranciscoText-Bold.otf */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -232,11 +253,9 @@
 		6BD5BD4D1BB86470004ABEDB /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				6BF2EEED1BB45FB5008A6D5E /* HSGameViewController.swift */,
+				6BA135CE1BCA66600016ADA1 /* New Game */,
 				6BA100BF1BC52F8B009A2F56 /* HSGameBoardViewController.swift */,
-				6BFC12861BB7FCF400037012 /* HSRegisterUserViewController.swift */,
-				6BFC12881BB800B700037012 /* HSPlayerSelectionContainerViewController.swift */,
-				6BCF11301BB331E700066186 /* HSNewGameViewController.swift */,
+				6BF2EEED1BB45FB5008A6D5E /* HSGameViewController.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -245,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				6BCF11321BB3324100066186 /* HSLeaderboardTableViewController.swift */,
+				6BC76BC61BCAC228005F3C40 /* HSUserProfileViewController.swift */,
 			);
 			path = Leaderboard;
 			sourceTree = "<group>";
@@ -363,8 +383,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				6BCF112D1BB3305600066186 /* Main.storyboard in Resources */,
+				6B3731551BC92B1C0098C872 /* SanFranciscoText-Light.otf in Resources */,
 				6BCF10FC1BB31D4600066186 /* Assets.xcassets in Resources */,
 				6BCF112C1BB3305600066186 /* LaunchScreen.storyboard in Resources */,
+				6B3731561BC92B200098C872 /* SanFranciscoText-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,21 +411,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B3731501BC921F80098C872 /* HSNewGameTableViewCell.swift in Sources */,
 				6BCF11351BB3341A00066186 /* HSSettingsTableViewController.swift in Sources */,
 				6B0009EF1BC405CB00CC1B65 /* HSSideBarDelegate.swift in Sources */,
 				6B0034F01BB54D5100963FD6 /* HSCoreDataAccess.swift in Sources */,
+				6B3731521BC927190098C872 /* HSThemeManager.swift in Sources */,
 				6BCF10F21BB31D4600066186 /* HSAppDelegate.swift in Sources */,
 				6BCF112F1BB3310900066186 /* HSMenuViewController.swift in Sources */,
 				6BCF11331BB3324100066186 /* HSLeaderboardTableViewController.swift in Sources */,
 				6B80BF661BB466D50017DD79 /* HSGameConstants.swift in Sources */,
 				6BF55D281BB6B08D0050497B /* HSDatabaseManager.swift in Sources */,
+				6BC76BC71BCAC228005F3C40 /* HSUserProfileViewController.swift in Sources */,
 				6B0009ED1BC4009200CC1B65 /* HSContainerViewController.swift in Sources */,
 				6BCF11311BB331E700066186 /* HSNewGameViewController.swift in Sources */,
 				6B0034EE1BB54D3600963FD6 /* User+CoreDataProperties.swift in Sources */,
 				6BA100C01BC52F8B009A2F56 /* HSGameBoardViewController.swift in Sources */,
 				6BCF10FA1BB31D4600066186 /* Hasami_Shogi.xcdatamodeld in Sources */,
-				6BFC12891BB800B700037012 /* HSPlayerSelectionContainerViewController.swift in Sources */,
-				6BFC12871BB7FCF400037012 /* HSRegisterUserViewController.swift in Sources */,
+				6BA135D01BCA66A40016ADA1 /* HSRegisterUserTableViewController.swift in Sources */,
 				6BA100C21BC538B7009A2F56 /* HSGameBoardCollectionViewCell.swift in Sources */,
 				6B0034ED1BB54D3600963FD6 /* User.swift in Sources */,
 				6BF2EEEE1BB45FB5008A6D5E /* HSGameViewController.swift in Sources */,
@@ -548,6 +572,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "$(SRCROOT)/Hasami Shogi/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -564,6 +589,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "$(SRCROOT)/Hasami Shogi/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

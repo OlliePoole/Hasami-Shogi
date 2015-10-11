@@ -10,59 +10,133 @@ import UIKit
 
 class HSNewGameViewController: UIViewController {
     
-    var playerOneChild : HSPlayerSelectionContainerViewController!
-    var playerTwoChild : HSPlayerSelectionContainerViewController!
-    
-    var datasource : Array<User>!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.datasource = HSDatabaseManager.fetchAllUsers()
+    private enum CellSelectionState : Int {
+        case PlayerOne
+        case PlayerTwo
+        case NotSelected
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "PlayerOnePlayerSelectionContainerViewController" {
-            self.playerOneChild = segue.destinationViewController as! HSPlayerSelectionContainerViewController
-            self.playerOneChild.delegate = self
+    @IBOutlet weak var startGameButton : UIButton!
+    
+    var datasource : Array<Dictionary<String, AnyObject>>!
+    
+    var playerOne : User!
+    var playerTwo : User!
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Fetch all the saved users
+        let users = HSDatabaseManager.fetchAllUsers()
+        
+        if users?.count == 0 { return }
+        
+        datasource = Array<Dictionary<String, AnyObject>>()
+        
+        for user in users! {
+            var userDict = Dictionary<String, AnyObject>()
+            
+            userDict["User"] = user
+            userDict["CellState"] = NSNumber(integer: CellSelectionState.NotSelected.rawValue)
+            
+            datasource.append(userDict)
         }
-        else if segue.identifier == "PlayerTwoPlayerSelectionContainerViewController" {
-            self.playerTwoChild = segue.destinationViewController as! HSPlayerSelectionContainerViewController
-            self.playerTwoChild.delegate = self
+    }
+    
+    @IBAction func cancelNewGameButtonSelected(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func registerButtobPressed(sender: AnyObject) {
+        
+    }
+}
+
+// MARK: - UITableViewDataSource
+extension HSNewGameViewController : UITableViewDataSource {
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return datasource.count
+        // The +1 is for a cell that enables the user to register a new user
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        var cell = tableView.dequeueReusableCellWithIdentifier("HSNewGameTableViewCell", forIndexPath: indexPath) as! HSNewGameTableViewCell
+        
+        let userDict = datasource[indexPath.row]
+        
+        let user = userDict["User"] as! User
+        let cellState = CellSelectionState(rawValue: userDict["CellState"] as! Int)
+        
+        cell = cell.buildCellForUser(user)
+        
+        // Hide or show the overlay based on if the datasource has the cell marked as selected
+        if cellState == .NotSelected {
+            cell.selectionOverlayView.hidden = true
         }
+        else {
+            cell.selectionOverlayLabel.text = (cellState == .PlayerOne) ? "Player One" : "Player Two"
+            cell.selectionOverlayView.backgroundColor = (cellState == .PlayerOne) ? UIColor.redColor() : UIColor.blueColor()
+            
+            cell.selectionOverlayView.hidden = false
+        }
+        
+        return cell
     }
     
-    //MARK: - Handle Button Interactions
-    
-    @IBAction func popViewControllerButtonPressed(sender: AnyObject) {
-        navigationController?.popViewControllerAnimated(true)
-    }
-    
-    @IBAction func startGameButtonPressed(sender: AnyObject) {
-        // Check two players have been selected
-        // Start the game
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 140
     }
 }
 
-// MARK: - HSPlayerSelectionContainerViewControllerDelegate
-extension HSNewGameViewController : HSPlayerSelectionContainerViewControllerDelegate {
+// MARK: - UITableViewDelegate
+extension HSNewGameViewController : UITableViewDelegate {
     
-    func registerNewPlayer(sender: HSPlayerSelectionContainerViewController) {
-        // push register viewController
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let registerViewController = self.storyboard?.instantiateViewControllerWithIdentifier("HSRegisterUserViewController") as! HSRegisterUserViewController
-        registerViewController.delegate = self
+        var userDict = datasource[indexPath.row]
         
-        self.navigationController?.pushViewController(registerViewController, animated: true)
+        // If playerOne has been selected, pick player two
+        if playerOne == nil && playerTwo == nil {
+            
+            userDict["CellState"] = NSNumber(integer: CellSelectionState.PlayerOne.rawValue)
+            playerOne = userDict["User"] as! User
+        }
+        else if playerOne != nil && playerTwo == nil {
+            
+            // Does the cell already belong to another user?
+            if CellSelectionState(rawValue: userDict["CellState"] as! Int) == .PlayerOne {
+                return
+            }
+            
+            userDict["CellState"] = NSNumber(integer: CellSelectionState.PlayerTwo.rawValue)
+            playerTwo = userDict["User"] as! User
+        }
+        else { // Both selected
+            let cellSelection = CellSelectionState(rawValue: userDict["CellState"] as! Int)
+            
+            if cellSelection == .NotSelected {
+                return
+            }
+            
+            // Is the selection an existing selection (i.e. Player One / Player Two)
+            if cellSelection == .PlayerOne {
+                playerOne = nil
+            }
+            else {
+                playerTwo = nil
+            }
+            userDict["CellState"] = NSNumber(integer: CellSelectionState.NotSelected.rawValue)
+        }
+        
+        // Update the datasource
+        datasource[indexPath.row] = userDict
+        
+        // Update the cell in the tableview
+        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
+        
+        // Check if two selections have been made
+        startGameButton.hidden = !(playerOne != nil && playerTwo != nil)
     }
 }
-
-extension HSNewGameViewController : HSRegisterUserViewControllerDelegate {
-    
-    func didFinishRegisteringUser(user: User) {
-        // Update child with new user
-        
-    }
-}
-
-

@@ -11,22 +11,19 @@ import UIKit
 /// The view controller responsible for playing the game
 class HSGameViewController: UIViewController {
     
-    var playerHasMadeFirstMove : Bool!
-    var pieceSelected : Bool!
-    
-    var pieceSelectedPosition : NSIndexPath!
-    
-    var gamePiecePositions : [[Int]]!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     @IBAction func menuButtonPressed(sender: AnyObject) {
         HSSideBarDelegateStore.delegate?.toggleSideBar(self)
     }
     
+    @IBAction func restartGameButtonPressed(sender: AnyObject) {
+        let newGameViewController = storyboard?.instantiateViewControllerWithIdentifier("HSNewGameViewController") as! HSNewGameViewController
+        let navController = UINavigationController(rootViewController: newGameViewController)
         
+        presentViewController(navController, animated: true, completion: nil)
+    }
+    
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "HSGameBoardViewController" {
             let gameBoardViewController = segue.destinationViewController as! HSGameBoardViewController
@@ -215,7 +212,7 @@ extension HSGameViewController: HSGameBoardViewControllerDelegate {
             }
         }
         
-        // All checks have been made, return 
+        // All checks have been made, return
         return (false, nil)
     }
     
