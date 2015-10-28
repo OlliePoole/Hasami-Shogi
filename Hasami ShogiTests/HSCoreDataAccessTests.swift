@@ -44,7 +44,7 @@ class HSCoreDataAccessTests: XCTestCase {
                 if let result = result as? User {
                     let username = result.username!
                     
-                    let predicate = NSPredicate(format: "username = %@", username)
+                    let predicate = NSPredicate(format: "username == %@", username)
                     let predicateResults = HSCoreDataAccess.recordsFromTableWithTableName(tableName, predicate: predicate)
                     
                     // Asset that one record has been fetched

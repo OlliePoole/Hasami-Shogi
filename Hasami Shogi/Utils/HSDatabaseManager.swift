@@ -14,7 +14,6 @@ class HSDatabaseManager: NSObject {
     
     static let userTableName = "User"
 
-    
     /**
     Fetches all the users from Core Data
     
@@ -26,6 +25,18 @@ class HSDatabaseManager: NSObject {
         return users as? [User]
     }
     
+    
+    /**
+     When first launching, create two users "Player One", "Player Two"
+     
+     - returns: The two new users
+     */
+    static func createDummyUsersForFirstLaunch() -> (playerOne: User, playerTwo: User) {
+        let playerOne = HSDatabaseManager.createUserWith("Player One", bio: "Player one bio", profileImage: nil)
+        let playerTwo = HSDatabaseManager.createUserWith("Player Two", bio: "Player two bio", profileImage: nil)
+        
+        return (playerOne!, playerTwo!)
+    }
     
     /**
     Fetches a single user based on their username
@@ -52,7 +63,7 @@ class HSDatabaseManager: NSObject {
     
     - returns: The newly created User object, returns nil if save failed
     */
-    static func createUserWith(userName: String, bio: String, profileImage: UIImage) -> User? {
+    static func createUserWith(userName: String, bio: String, profileImage: UIImage?) -> User? {
         
         let user = HSCoreDataAccess.createUserEntity() as! User
         user.username = userName
@@ -67,6 +78,16 @@ class HSDatabaseManager: NSObject {
             // Save failed
             return nil
         }
+    }
+    
+    
+    /**
+    Used to manually save any edited information
+    
+    - returns: A Boolean value for the success of the save
+    */
+    static func saveCoreDataContext() -> Bool! {
+        return HSCoreDataAccess.saveContext()
     }
     
 }

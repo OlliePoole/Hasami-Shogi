@@ -1,21 +1,21 @@
 //
-//  HSNewGameTableViewCell.swift
+//  HSLeaderboardTableViewCell.swift
 //  Hasami Shogi
 //
-//  Created by Oliver Poole on 10/10/2015.
+//  Created by Oliver Poole on 11/10/2015.
 //  Copyright © 2015 OliverPoole. All rights reserved.
 //
 
 import UIKit
 
-class HSNewGameTableViewCell: UITableViewCell {
-    
+class HSLeaderboardTableViewCell: UITableViewCell {
+
     @IBOutlet weak var profileImageView: UIImageView!
+
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var bioTextView: UITextView!
-    
-    @IBOutlet weak var selectionOverlayView: UIView!
-    @IBOutlet weak var selectionOverlayLabel: UILabel!
+
+    @IBOutlet weak var pointsLabel: UILabel!
     
     /**
     Given an empty HSNewGameTableViewCell, the method customises it to the user object
@@ -24,7 +24,7 @@ class HSNewGameTableViewCell: UITableViewCell {
     
     - returns: The customised cell
     */
-    func buildCellForUser(user: User) -> HSNewGameTableViewCell! {
+    func buildCellForUser(user: User) -> HSLeaderboardTableViewCell! {
         
         usernameLabel?.text = user.username
         bioTextView?.text = user.bio
@@ -35,8 +35,9 @@ class HSNewGameTableViewCell: UITableViewCell {
         profileImageView?.layer.masksToBounds = true
         profileImageView?.layer.borderWidth = 0
         
-        selectionOverlayView.hidden = true
-
+        pointsLabel.text = "\(user.points as! Int) points"
+        
         return self
     }
+    
 }

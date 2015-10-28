@@ -26,7 +26,7 @@ class HSGameConstants: NSObject {
         get {
             return GameType(rawValue: NSUserDefaults.standardUserDefaults().integerForKey("GameType"))!
         }
-        set {
+        set (gameType) {
             NSUserDefaults.standardUserDefaults().setInteger(gameType.rawValue, forKey: "GameType")
         }
     }
@@ -41,8 +41,8 @@ class HSGameConstants: NSObject {
         get {
             return NSUserDefaults.standardUserDefaults().boolForKey("LineToWin")
         }
-        set {
-            NSUserDefaults.standardUserDefaults().setBool(lineToWin, forKey: "LneToWin")
+        set (lineToWin) {
+            NSUserDefaults.standardUserDefaults().setBool(lineToWin, forKey: "LineToWin")
         }
     }
     
@@ -52,7 +52,7 @@ class HSGameConstants: NSObject {
         get {
             return NSUserDefaults.standardUserDefaults().integerForKey("PiecesToWin")
         }
-        set {
+        set (numberOfPiecesToWin) {
             NSUserDefaults.standardUserDefaults().setInteger(numberOfPiecesToWin, forKey: "PiecesToWin")
         }
     }

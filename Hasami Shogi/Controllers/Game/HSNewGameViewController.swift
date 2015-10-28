@@ -47,7 +47,11 @@ class HSNewGameViewController: UIViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBAction func registerButtobPressed(sender: AnyObject) {
+    @IBAction func registerButtonPressed(sender: AnyObject) {
+        
+    }
+    
+    @IBAction func startGameButtonPressed(sender: AnyObject) {
         
     }
 }

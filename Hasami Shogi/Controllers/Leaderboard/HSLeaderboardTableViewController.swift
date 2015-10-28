@@ -35,7 +35,16 @@ extension HSLeaderboardTableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let user = datasource[indexPath.row]
+        var cell = tableView.dequeueReusableCellWithIdentifier("HSLeaderboardTableViewCell", forIndexPath: indexPath) as! HSLeaderboardTableViewCell
+        
+        cell = cell.buildCellForUser(user)
+        
+        return cell
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 140
     }
 }
 

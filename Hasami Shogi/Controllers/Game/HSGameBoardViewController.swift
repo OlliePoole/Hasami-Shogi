@@ -10,9 +10,10 @@ import UIKit
 
 protocol HSGameBoardViewControllerDelegate {
     func gameBoard(gameBoard : HSGameBoardViewController, canMovePieceFrom startIndex: NSIndexPath, to endIndex: NSIndexPath) -> Bool!
-    func gameBoard(gameBoard : HSGameBoardViewController, checkForDeathAt currentIndex: NSIndexPath) -> (deathDetected: Bool!, deathIndexPath: NSIndexPath?)
+    func gameBoard(gameBoard : HSGameBoardViewController, checkForDeathAt currentIndex: NSIndexPath) -> [NSIndexPath]?
     func gameBoard(gameBoard : HSGameBoardViewController, checkIfCellAtIndex startIndex: NSIndexPath, hasTheSameOwnerAsCellAt endIndex: NSIndexPath) -> Bool!
-    func gameBoard(gameBoard : HSGameBoardViewController, checkForWinningConditionsWith playerOneInfo: PlayerInfo, playerTwoInfo: PlayerInfo) -> Bool!
+    func gameBoard(gameBoard : HSGameBoardViewController, checkForWinningConditionsWith playerOneInfo: PlayerInfo, playerTwoInfo: PlayerInfo, lastMove indexPath: NSIndexPath) -> Bool!
+    func showNewGameDialogWithBoard(gameBoard : HSGameBoardViewController)
 }
 
 enum Player {
@@ -27,7 +28,7 @@ struct PlayerInfo {
 
 /// Responsible for displaying and updating the game board
 class HSGameBoardViewController: UIViewController {
-
+    
     var delegate : HSGameBoardViewControllerDelegate!
     
     var hasMadeFirstMove : Bool = false
@@ -55,13 +56,24 @@ class HSGameBoardViewController: UIViewController {
     @IBOutlet weak var playerOneIndicatorImageView : UIImageView!
     @IBOutlet weak var playerTwoIndicatorImageView : UIImageView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    /**
+     Restarts the game
+    */
+    func shouldRestartGame() {
+        hasMadeFirstMove = false
+        currentPlayer = .PlayerOne
         
-        playerOneInfo = PlayerInfo(user: User(), countersRemaining: HSGameConstants.numberOfPiecesPerPlayer)
-        playerTwoInfo = PlayerInfo(user: User(), countersRemaining: HSGameConstants.numberOfPiecesPerPlayer)
+        collectionView.reloadData()
     }
     
+    
+    func shouldStartNewGameWithPlayerOne(playerOne : User, andPlayerTwo playerTwo : User) {
+        
+        playerOneInfo = PlayerInfo(user: playerOne, countersRemaining: HSGameConstants.numberOfPiecesPerPlayer)
+        playerTwoInfo = PlayerInfo(user: playerTwo, countersRemaining: HSGameConstants.numberOfPiecesPerPlayer)
+        
+        shouldRestartGame()
+    }
     
     /**
     Moves a counter from one location to another
@@ -91,8 +103,18 @@ class HSGameBoardViewController: UIViewController {
     - parameter indexPath: the indexpath of the error
     */
     func indicateErrorAt(indexPath: NSIndexPath) {
-        print("error at " + indexPath.description)
-        //TODO: Do something useful here
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! HSGameBoardCollectionViewCell
+        
+        UIView.animateWithDuration(0.25, animations: {
+            () -> Void in
+            cell.errorIndicatorImageView.alpha = 1.0
+            })
+            { (finished) -> Void in
+                UIView.animateWithDuration(0.25, animations: {
+                    () -> Void in
+                    cell.errorIndicatorImageView.alpha = 0.0
+                })
+        }
     }
     
     /**
@@ -145,13 +167,29 @@ class HSGameBoardViewController: UIViewController {
     */
     func indicateGameFinishedWith(winningPlayer : Player) {
         
-        let alert = UIAlertController(title: "Game Won!", message: "Congratulations ... <<NAME HERE>>", preferredStyle: .Alert)
+        let winningUser = (winningPlayer == .PlayerOne) ? playerOneInfo.user : playerTwoInfo.user
+        
+        let alert = UIAlertController(title: "Game Won!", message: "Congratulations \(winningUser.username)", preferredStyle: .Alert)
+        
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        
+        alert.addAction(UIAlertAction(title: "New Game", style: .Default, handler: {
+            (alertAction: UIAlertAction) -> Void in
+            self.delegate?.showNewGameDialogWithBoard(self)
+        }))
         
         parentViewController!.presentViewController(alert, animated: true, completion: nil)
         
-        //TODO: Restart game
-        //TODO: Update user in database
+        // Update the user
+        if winningPlayer == .PlayerOne {
+            playerOneInfo.user.points = Int(playerOneInfo.user.points!) + 2
+        }
+        else {
+            playerTwoInfo.user.points = Int(playerTwoInfo.user.points!) + 2
+        }
+        
+        // Save the points update
+        HSDatabaseManager.saveCoreDataContext()
     }
 }
 
@@ -182,19 +220,25 @@ extension HSGameBoardViewController : UICollectionViewDelegate {
                 // Check for death
                 let deathCheck = delegate?.gameBoard(self, checkForDeathAt: indexPath)
                 
-                if deathCheck!.deathDetected! {
-                    indicateDeathAt(deathCheck!.deathIndexPath!)
-                    
-                    // Now we know a counter has been captured, check if the game is finished
-                    let gameFinished = delegate?.gameBoard(self, checkForWinningConditionsWith: playerOneInfo, playerTwoInfo: playerTwoInfo)
-                    
-                    if gameFinished! {
-                        indicateGameFinishedWith(currentPlayer)
-                    }
+                if deathCheck?.count == 0 {
+                    return
+                }
+                
+                // Remove the dead counters
+                for deathIndex in deathCheck! {
+                    indicateDeathAt(deathIndex)
+                }
+                
+                // Now we know a counter has been captured, check if the game is finished
+                let gameFinished = delegate?.gameBoard(self, checkForWinningConditionsWith: playerOneInfo, playerTwoInfo: playerTwoInfo, lastMove: indexPath)
+                
+                if gameFinished! {
+                    indicateGameFinishedWith(currentPlayer)
                 }
             }
             else {
                 // Highlight end cell with error
+                indicateErrorAt(indexPath)
             }
         }
         else { // currentSelection = nil
@@ -238,9 +282,11 @@ extension HSGameBoardViewController : UICollectionViewDataSource {
             if indexPath.section == 0 {
                 cell.currentState = .RedCounter
             }
-            
-            if indexPath.section == 8 {
+            else if indexPath.section == 8 {
                 cell.currentState = .BlueCounter
+            }
+            else {
+                cell.currentState = .Empty
             }
         }
         else {
@@ -248,9 +294,11 @@ extension HSGameBoardViewController : UICollectionViewDataSource {
             if indexPath.section == 0 || indexPath.section == 1 {
                 cell.currentState = .RedCounter
             }
-            
-            if indexPath.section == 7 || indexPath.section == 8 {
+            else if indexPath.section == 7 || indexPath.section == 8 {
                 cell.currentState = .BlueCounter
+            }
+            else {
+                cell.currentState = .Empty
             }
         }
         
@@ -263,4 +311,6 @@ extension HSGameBoardViewController : UICollectionViewDataSource {
         
         return CGSizeMake(cellWidth - 1, cellWidth - 1)
     }
+    
+    
 }

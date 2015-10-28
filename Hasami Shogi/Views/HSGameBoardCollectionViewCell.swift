@@ -21,7 +21,6 @@ class HSGameBoardCollectionViewCell: UICollectionViewCell {
         didSet {
             
             switch currentState! {
-                
             case .BlueCounter:
                 counterImageView.image = UIImage(named: "Blue Counter")
                 
@@ -30,20 +29,20 @@ class HSGameBoardCollectionViewCell: UICollectionViewCell {
                 
             case .Empty:
                 counterImageView.image = nil
-                
             }
         }
     }
     
     var owner : Player? {
         get {
-            if currentState == .RedCounter {
+            switch currentState! {
+            case .RedCounter:
                 return Player.PlayerOne
-            }
-            else if currentState == .BlueCounter {
+                
+            case .BlueCounter:
                 return Player.PlayerTwo
-            }
-            else {
+                
+            case .Empty:
                 return nil
             }
         }
@@ -51,6 +50,7 @@ class HSGameBoardCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var outlineImageView : UIImageView!
     @IBOutlet weak var counterImageView : UIImageView!
+    @IBOutlet weak var errorIndicatorImageView : UIImageView!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

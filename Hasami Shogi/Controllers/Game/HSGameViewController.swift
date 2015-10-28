@@ -11,12 +11,24 @@ import UIKit
 /// The view controller responsible for playing the game
 class HSGameViewController: UIViewController {
     
+    @IBOutlet weak var playerOneNameLabel: UILabel!
+    @IBOutlet weak var playerTwoNameLabel: UILabel!
+    
+    @IBOutlet weak var playerOneCountersRemainingLabel: UILabel!
+    @IBOutlet weak var playerTwoCountersRemainingLabel: UILabel!
+    
     
     @IBAction func menuButtonPressed(sender: AnyObject) {
         HSSideBarDelegateStore.delegate?.toggleSideBar(self)
     }
     
     @IBAction func restartGameButtonPressed(sender: AnyObject) {
+        let gameBoard = childViewControllers.first as! HSGameBoardViewController
+        
+        gameBoard.shouldRestartGame()
+    }
+    
+    @IBAction func newGameButtonPressed(sender: AnyObject) {
         let newGameViewController = storyboard?.instantiateViewControllerWithIdentifier("HSNewGameViewController") as! HSNewGameViewController
         let navController = UINavigationController(rootViewController: newGameViewController)
         
@@ -29,6 +41,19 @@ class HSGameViewController: UIViewController {
             let gameBoardViewController = segue.destinationViewController as! HSGameBoardViewController
             
             gameBoardViewController.delegate = self
+            
+            if (HSDatabaseManager.fetchAllUsers()?.count == 0) {
+                let players = HSDatabaseManager.createDummyUsersForFirstLaunch()
+                
+                // Start a new game with the dummy users
+                gameBoardViewController.shouldStartNewGameWithPlayerOne(players.playerOne, andPlayerTwo: players.playerTwo)
+            }
+            else {
+                // Load the previous two players and start a match with them
+                
+            }
+            
+            
         }
     }
 }
@@ -138,87 +163,104 @@ extension HSGameViewController: HSGameBoardViewControllerDelegate {
         }
     }
     
-    
-    func gameBoard(gameBoard: HSGameBoardViewController, checkForDeathAt currentIndex: NSIndexPath) -> (deathDetected: Bool!, deathIndexPath: NSIndexPath?) {
+    func gameBoard(gameBoard: HSGameBoardViewController, checkForDeathAt currentIndex: NSIndexPath) -> [NSIndexPath]? {
         
-        let currentCell = cellForIndex(currentIndex.row, inSection: currentIndex.section, on: gameBoard)
+        enum CheckingState {
+            case Above
+            case Below
+            case Left
+            case Right
+        }
         
+        func cellStateAtIndexPath(indexPath: NSIndexPath, on gameBoard: HSGameBoardViewController) -> CellState {
+            let cell = gameBoard.collectionView.cellForItemAtIndexPath(indexPath) as! HSGameBoardCollectionViewCell
+            
+            return cell.currentState
+        }
+        
+        func checkInitalGameBoardBoundariesAtIndex(indexPath: NSIndexPath) -> Bool! {
+            return indexPath.section >= 0 &&
+                (HSGameConstants.numberOfSections - indexPath.section) >= 0 &&
+                currentIndex.row >= 0 &&
+                (HSGameConstants.numberOfRows - currentIndex.row) >= 0
+        }
+        
+        func checkRepeatGameBoardBoundariesAtIndex(indexPath: NSIndexPath, withCurrentCheck checkingState: CheckingState) -> Bool! {
+            switch checkingState {
+            case .Above: return indexPath.section > 0
+            case .Below: return indexPath.section < HSGameConstants.numberOfSections
+            case .Left: return indexPath.row > 0
+            case .Right: return indexPath.row < HSGameConstants.numberOfRows
+            }
+        }
+        
+        func nextIndexPath(currentIndexPath: NSIndexPath, withCurrentCheck checkingState: CheckingState) -> NSIndexPath {
+            
+            switch checkingState {
+            case .Above: return NSIndexPath(forRow: currentIndexPath.row, inSection: currentIndexPath.section - 1)
+            case .Below: return NSIndexPath(forRow: currentIndexPath.row, inSection: currentIndexPath.section + 1)
+            case .Left: return NSIndexPath(forRow: currentIndexPath.row - 1, inSection: currentIndexPath.section)
+            case .Right: return NSIndexPath(forRow: currentIndexPath.row + 1, inSection: currentIndexPath.section)
+            }
+        }
+        
+        var checksToMake = [CheckingState.Above, CheckingState.Below, CheckingState.Left, CheckingState.Right]
+        var deathIndexPaths = [NSIndexPath]()
         
         // Is the edge of the board within two spaces of the top of the cell?
-        if currentIndex.section > 2 {
-            let cellAbove = cellForIndex(currentIndex.row, inSection: currentIndex.section - 1, on: gameBoard)
+        if checkInitalGameBoardBoundariesAtIndex(currentIndex)! {
             
-            // Does the cell above contain an enemy counter?
-            if cellAbove.currentState != currentCell.currentState && cellAbove.currentState != .Empty {
+            while checksToMake.count > 0 {
                 
-                let cellAboveAbove = cellForIndex(currentIndex.row, inSection: currentIndex.section - 2, on: gameBoard)
+                let currentCheck = checksToMake.removeFirst()
                 
-                // Does the cell above that contain a friendly counter?
-                if cellAboveAbove.currentState == currentCell.currentState {
-                    return (true, NSIndexPath(forRow: currentIndex.row, inSection: currentIndex.section - 1))
+                var nextCellIndex = nextIndexPath(currentIndex, withCurrentCheck: currentCheck)
+                
+                while checkRepeatGameBoardBoundariesAtIndex(nextCellIndex, withCurrentCheck: currentCheck)! {
+                    
+                    // What is the state of the next cell?
+                    let cellState = cellStateAtIndexPath(nextCellIndex, on: gameBoard)
+                    
+                    // If it's empty we can stop checking
+                    if cellState == .Empty {
+                        break
+                    }
+                
+                    // If the cell has a differnt owner to the current cell
+                    if self.gameBoard(gameBoard, checkIfCellAtIndex: nextCellIndex, hasTheSameOwnerAsCellAt: currentIndex) == false {
+                        // Yes it does, add to deathIndexPaths
+                        deathIndexPaths.append(nextCellIndex)
+                    } else {
+                        // We've found a friendly counter, return from funtion
+                        return deathIndexPaths
+                    }
+
+                    nextCellIndex = nextIndexPath(nextCellIndex, withCurrentCheck: currentCheck)
                 }
             }
         }
         
-        
-        // Is the edge of the board within two spaces of the bottom of the cell?
-        if (HSGameConstants.numberOfSections - currentIndex.section) > 2 {
-            let cellBelow = cellForIndex(currentIndex.row, inSection: currentIndex.section + 1, on: gameBoard)
-            
-            // Does the cell below contain an enemy counter?
-            if cellBelow.currentState != currentCell.currentState && cellBelow.currentState != .Empty {
-                
-                let cellBelowBelow = cellForIndex(currentIndex.row, inSection: currentIndex.section + 2, on: gameBoard)
-                
-                // Does that cell contain a friendly counter?
-                if cellBelowBelow.currentState == currentCell.currentState {
-                    return (true, NSIndexPath(forRow: currentIndex.row, inSection: currentIndex.section + 1))
-                }
-            }
-        }
-        
-        
-        // Is the edge of the board within two spaces of the left of the cell?
-        if currentIndex.row > 2 {
-            let leftCell = cellForIndex(currentIndex.row - 1, inSection: currentIndex.section, on: gameBoard)
-            
-            // Does that cell contain an enemy counter?
-            if leftCell.currentState != currentCell.currentState && leftCell.currentState != .Empty {
-                
-                let leftLeftCell = cellForIndex(currentIndex.row - 2, inSection: currentIndex.section, on: gameBoard)
-                
-                // Does that cell contain a friendly counter?
-                if leftLeftCell.currentState == currentCell.currentState {
-                    return (true, NSIndexPath(forRow: currentIndex.row - 1, inSection: currentIndex.section))
-                }
-                
-            }
-        }
-        
-        
-        // Is the edge of the board within two spaces of the right of the cell?
-        if (HSGameConstants.numberOfRows - currentIndex.row) > 2 {
-            let rightCell = cellForIndex(currentIndex.row + 1, inSection: currentIndex.section, on: gameBoard)
-            
-            // Does that cell contain an enemy counter?
-            if rightCell.currentState != currentCell.currentState && rightCell.currentState != .Empty {
-                
-                let rightRightCell = cellForIndex(currentIndex.row + 2, inSection: currentIndex.section, on: gameBoard)
-                
-                // Does that cell contain a friendly counter?
-                if rightRightCell.currentState == currentCell.currentState {
-                    return (true, NSIndexPath(forRow: currentIndex.row + 1, inSection: currentIndex.section))
-                }
-            }
-        }
-        
-        // All checks have been made, return
-        return (false, nil)
+        // All checks have been made, return empty array
+        return [NSIndexPath]()
     }
     
-    func gameBoard(gameBoard: HSGameBoardViewController, checkForWinningConditionsWith playerOneInfo: PlayerInfo, playerTwoInfo: PlayerInfo) -> Bool! {
+    func gameBoard(gameBoard: HSGameBoardViewController, checkForWinningConditionsWith playerOneInfo: PlayerInfo, playerTwoInfo: PlayerInfo, lastMove indexPath: NSIndexPath) -> Bool! {
+        
+        // If line to win
+        if HSGameConstants.lineToWin {
+            
+            // Check is last move resulted in a line
+            
+        }
         
         // Return true if either player only have one counter remaining
-        return playerOneInfo.countersRemaining == 1 || playerTwoInfo.countersRemaining == 1
+        return playerOneInfo.countersRemaining == HSGameConstants.numberOfPiecesToWin || playerTwoInfo.countersRemaining == HSGameConstants.numberOfPiecesToWin
+    }
+    
+    func showNewGameDialogWithBoard(gameBoard: HSGameBoardViewController) {
+        let newGameViewController = storyboard?.instantiateViewControllerWithIdentifier("HSNewGameViewController") as! HSNewGameViewController
+        let navController = UINavigationController(rootViewController: newGameViewController)
+        
+        presentViewController(navController, animated: true, completion: nil)
     }
 }
