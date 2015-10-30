@@ -12,10 +12,15 @@ import CoreData
 
 class User: NSManagedObject {
 
-// Insert code here to add functionality to your managed object subclass
+    @NSManaged var username: String?
+    @NSManaged var bio: String?
+    @NSManaged var points: NSNumber?
+    @NSManaged var isDefault: NSNumber?
+    
     var profileImage : UIImage {
         get {
             return UIImage(named: "Homer Simpson")!
         }
     }
+    
 }

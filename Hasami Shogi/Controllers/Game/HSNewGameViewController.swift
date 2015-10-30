@@ -8,6 +8,13 @@
 
 import UIKit
 
+/**
+ *  Notify the presenting view controller that the user has asked to start a new game
+ */
+protocol HSNewGameViewControllerDelegate {
+    func newGame(newGameViewController : HSNewGameViewController, shouldStartNewGameWith playerOne: User, and playerTwo: User)
+}
+
 class HSNewGameViewController: UIViewController {
     
     private enum CellSelectionState : Int {
@@ -17,17 +24,21 @@ class HSNewGameViewController: UIViewController {
     }
     
     @IBOutlet weak var startGameButton : UIButton!
+    @IBOutlet weak var tableView : UITableView!
     
     var datasource : Array<Dictionary<String, AnyObject>>!
     
     var playerOne : User!
     var playerTwo : User!
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+    var delegate : HSNewGameViewControllerDelegate!
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         // Fetch all the saved users
-        let users = HSDatabaseManager.fetchAllUsers()
+        let users = HSGameDataManager.fetchAllUsers()
         
         if users?.count == 0 { return }
         
@@ -48,11 +59,18 @@ class HSNewGameViewController: UIViewController {
     }
     
     @IBAction func registerButtonPressed(sender: AnyObject) {
+        let registerUserViewController = storyboard?.instantiateViewControllerWithIdentifier("HSRegisterUserTableViewController") as! HSRegisterUserTableViewController
         
+        registerUserViewController.delegate = self
+        
+        navigationController?.pushViewController(registerUserViewController, animated: true)
     }
     
     @IBAction func startGameButtonPressed(sender: AnyObject) {
+        // Save the players as the default for next time
+        HSGameDataManager.saveCurrentTwoPlayersAsDefaultWithPlayerOne(playerOne, playerTwo: playerTwo)
         
+        delegate?.newGame(self, shouldStartNewGameWith: playerOne, and: playerTwo)
     }
 }
 
@@ -142,5 +160,21 @@ extension HSNewGameViewController : UITableViewDelegate {
         
         // Check if two selections have been made
         startGameButton.hidden = !(playerOne != nil && playerTwo != nil)
+    }
+}
+
+extension HSNewGameViewController : HSRegisterUserTableViewControllerDelegate {
+    func registerTableViewController(registerTableViewController: HSRegisterUserTableViewController, didRegisterNewUser newUser: User) {
+        
+        // Add the new user to the datasource
+        var userDict = Dictionary<String, AnyObject>()
+        
+        userDict["User"] = newUser
+        userDict["CellState"] = NSNumber(integer: CellSelectionState.NotSelected.rawValue)
+        
+        datasource.append(userDict)
+    
+        // Reload data
+        tableView.reloadData()
     }
 }

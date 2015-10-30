@@ -61,12 +61,20 @@ class HSGameBoardViewController: UIViewController {
     */
     func shouldRestartGame() {
         hasMadeFirstMove = false
-        currentPlayer = .PlayerOne
         
-        collectionView.reloadData()
+        if let _ = collectionView {
+            collectionView.reloadData()
+        }
+        
+        updateScoreLabels()
     }
     
-    
+    /**
+     Indicates that the game board should start a new game with two players
+     
+     - parameter playerOne: player one
+     - parameter playerTwo: player two
+     */
     func shouldStartNewGameWithPlayerOne(playerOne : User, andPlayerTwo playerTwo : User) {
         
         playerOneInfo = PlayerInfo(user: playerOne, countersRemaining: HSGameConstants.numberOfPiecesPerPlayer)
@@ -74,6 +82,7 @@ class HSGameBoardViewController: UIViewController {
         
         shouldRestartGame()
     }
+    
     
     /**
     Moves a counter from one location to another
@@ -94,6 +103,7 @@ class HSGameBoardViewController: UIViewController {
         
         currentSelectedIndexPath = nil
     }
+    
     
     /**
     Used when an incorrect action has been made
@@ -116,6 +126,7 @@ class HSGameBoardViewController: UIViewController {
                 })
         }
     }
+    
     
     /**
     Used to indicate a cell has been selected to the user
@@ -157,8 +168,10 @@ class HSGameBoardViewController: UIViewController {
         else {
             playerOneInfo.countersRemaining--
         }
+        
+        updateScoreLabels()
     }
-    
+
     
     /**
     Indicates that the game has been won
@@ -167,14 +180,14 @@ class HSGameBoardViewController: UIViewController {
     */
     func indicateGameFinishedWith(winningPlayer : Player) {
         
-        let winningUser = (winningPlayer == .PlayerOne) ? playerOneInfo.user : playerTwoInfo.user
+        let winningUsername = (winningPlayer == .PlayerOne) ? playerOneInfo.user.username : playerTwoInfo.user.username
         
-        let alert = UIAlertController(title: "Game Won!", message: "Congratulations \(winningUser.username)", preferredStyle: .Alert)
-        
-        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        let alert = UIAlertController(title: "Game Won!", message: "Congratulations \(winningUsername!)", preferredStyle: .Alert)
         
         alert.addAction(UIAlertAction(title: "New Game", style: .Default, handler: {
             (alertAction: UIAlertAction) -> Void in
+            self.shouldRestartGame()
+            
             self.delegate?.showNewGameDialogWithBoard(self)
         }))
         
@@ -189,7 +202,21 @@ class HSGameBoardViewController: UIViewController {
         }
         
         // Save the points update
-        HSDatabaseManager.saveCoreDataContext()
+        HSGameDataManager.saveCoreDataContext()
+    }
+    
+    
+    /**
+     Updates the score labels when a piece is taken
+     */
+    func updateScoreLabels() {
+        let parent = parentViewController as! HSGameViewController
+        
+        parent.playerOneCountersRemainingLabel.text = "\(playerOneInfo.countersRemaining) counters"
+        parent.playerOneCountersRemainingLabel.textColor = HSThemeManager.redCounterColor()
+        
+        parent.playerTwoCountersRemainingLabel.text = "\(playerTwoInfo.countersRemaining) counters"
+        parent.playerTwoCountersRemainingLabel.textColor = HSThemeManager.blueCounterColor()
     }
 }
 

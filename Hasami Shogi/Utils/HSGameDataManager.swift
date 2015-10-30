@@ -10,7 +10,7 @@ import UIKit
 
 /// A further Core Data layer, sitting ontop of CoreDataAccess
 /// to give more useful methods
-class HSDatabaseManager: NSObject {
+class HSGameDataManager: NSObject {
     
     static let userTableName = "User"
 
@@ -27,15 +27,59 @@ class HSDatabaseManager: NSObject {
     
     
     /**
-     When first launching, create two users "Player One", "Player Two"
+     Creates dummy users to launch the game instead of requiring the user to register before playing
      
-     - returns: The two new users
+     - returns: The two created users
      */
     static func createDummyUsersForFirstLaunch() -> (playerOne: User, playerTwo: User) {
-        let playerOne = HSDatabaseManager.createUserWith("Player One", bio: "Player one bio", profileImage: nil)
-        let playerTwo = HSDatabaseManager.createUserWith("Player Two", bio: "Player two bio", profileImage: nil)
+        let playerOne = HSGameDataManager.createUserWith("Player One", bio: "Player one bio", profileImage: nil, isDefaultUser: true)
+        let playerTwo = HSGameDataManager.createUserWith("Player Two", bio: "Player two bio", profileImage: nil, isDefaultUser: true)
         
         return (playerOne!, playerTwo!)
+    }
+    
+    
+    /**
+     When a new game is started, save the two users playing. They then become the default users
+     to load the game with next time
+     
+     - parameter playerOne: player one
+     - parameter playerTwo: player two
+     */
+    static func saveCurrentTwoPlayersAsDefaultWithPlayerOne(playerOne: User, playerTwo: User) {
+        // Find the current default users
+        let predicate = NSPredicate(format: "isDefault == true")
+        
+        let defaultUsers = HSCoreDataAccess.recordsFromTableWithTableName(userTableName, predicate: predicate)
+        
+        // Set their default flags to no
+        for user in defaultUsers as! [User] {
+            user.isDefault = false
+        }
+        
+        // Set the new player's default flags to yes
+        for user in [playerOne, playerTwo] {
+            user.isDefault = true
+        }
+        
+        // Save the context
+        HSCoreDataAccess.saveContext()
+    }
+    
+    
+    /**
+     Loads the two default players from defaults. This means the user doesn't 
+     have to pick new players everytime they start a new game
+     
+     - returns: The two default players in a tuple
+     */
+    static func loadDefaultPlayers() -> (playerOne: User, playerTwo: User) {
+        // Find the current default users
+        let predicate = NSPredicate(format: "isDefault == true")
+        
+        let defaultUsers = HSCoreDataAccess.recordsFromTableWithTableName(userTableName, predicate: predicate)
+        
+        return (defaultUsers![0] as! User, defaultUsers![1] as! User)
     }
     
     /**
@@ -63,12 +107,13 @@ class HSDatabaseManager: NSObject {
     
     - returns: The newly created User object, returns nil if save failed
     */
-    static func createUserWith(userName: String, bio: String, profileImage: UIImage?) -> User? {
+    static func createUserWith(userName: String, bio: String, profileImage: UIImage?, isDefaultUser: Bool) -> User? {
         
         let user = HSCoreDataAccess.createUserEntity() as! User
         user.username = userName
         user.bio = bio
         //user.profileImage = profileImage //TODO: Fix this
+        user.isDefault = isDefaultUser
         
         if HSCoreDataAccess.saveContext() {
             // Save was successful

@@ -14,6 +14,14 @@ import AddressBookUI
 import Contacts
 import ContactsUI
 
+/**
+ *  Notify the presenting view controller that a new user has been added.
+ *  This will ensure that the presenting view controller knows to update the choices
+ */
+protocol HSRegisterUserTableViewControllerDelegate {
+    func registerTableViewController(registerTableViewController: HSRegisterUserTableViewController, didRegisterNewUser newUser: User)
+}
+
 class HSRegisterUserTableViewController: UITableViewController, UINavigationControllerDelegate {
 
     @IBOutlet weak var profileImageView: UIImageView!
@@ -21,6 +29,8 @@ class HSRegisterUserTableViewController: UITableViewController, UINavigationCont
     @IBOutlet weak var profileBioTextView: UITextView!
     
     var imagePicker : UIImagePickerController = UIImagePickerController()
+    
+    var delegate : HSRegisterUserTableViewControllerDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,10 +82,11 @@ class HSRegisterUserTableViewController: UITableViewController, UINavigationCont
                 
                 let image = profileImageView.image
                 if let image = image {
-                    let user = HSDatabaseManager.createUserWith(username!, bio: bio, profileImage: image)
+                    let user = HSGameDataManager.createUserWith(username!, bio: bio, profileImage: image, isDefaultUser: false)
                     
                     if let _ = user {
                         // save was successful, return to player screen
+                        delegate?.registerTableViewController(self, didRegisterNewUser: user!)
                         self.navigationController?.popViewControllerAnimated(true)
                         return
                     }

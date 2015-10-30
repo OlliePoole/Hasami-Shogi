@@ -16,13 +16,18 @@ class HSAppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        let allUsers = HSDatabaseManager.fetchAllUsers()
-        
-        if allUsers?.count == 0 {
-            HSDatabaseManager.createUserWith("Ollie", bio: "This is a bio about Ollie", profileImage: UIImage())
-            HSDatabaseManager.createUserWith("Alicia", bio: "This is a bio about Alicia", profileImage: UIImage())
-            HSDatabaseManager.createUserWith("George", bio: "This is a bio about George", profileImage: UIImage())
-        }
+//        let allUsers = HSGameDataManager.fetchAllUsers()
+//        
+//        if allUsers?.count == 0 {
+//            HSGameDataManager.createUserWith("Ollie", bio: "This is a bio about Ollie", profileImage: UIImage(), isDefaultUser: false)
+//            HSGameDataManager.createUserWith("Alicia", bio: "This is a bio about Alicia", profileImage: UIImage(), isDefaultUser: false)
+//            HSGameDataManager.createUserWith("George", bio: "This is a bio about George", profileImage: UIImage(), isDefaultUser: false)
+//        }
+//        else {
+//            for user in allUsers! {
+//                HSCoreDataAccess.managedObjectContext.deleteObject(user)
+//            }
+//        }
         
         return true
     }

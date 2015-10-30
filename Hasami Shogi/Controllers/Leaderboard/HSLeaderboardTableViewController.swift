@@ -15,7 +15,7 @@ class HSLeaderboardTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let users = HSDatabaseManager.fetchAllUsers()
+        let users = HSGameDataManager.fetchAllUsers()
         
         if let users = users where users.count > 0 {
             datasource = users
