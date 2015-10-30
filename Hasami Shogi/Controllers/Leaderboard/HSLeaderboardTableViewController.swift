@@ -17,8 +17,13 @@ class HSLeaderboardTableViewController: UITableViewController {
         
         let users = HSGameDataManager.fetchAllUsers()
         
+        // If there are users in the database, and those users aren't nil
         if let users = users where users.count > 0 {
-            datasource = users
+            
+            // sort the users
+            datasource = users.sort({ (firstUser: User, secondUser: User) -> Bool in
+                return (firstUser.points as! Int) > (secondUser.points as! Int)
+            })
         }
     }
     

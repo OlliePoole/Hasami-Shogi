@@ -13,6 +13,10 @@ class HSMenuViewController: UIViewController {
     
     let menuOptions = ["Game", "Leaderboard", "Settings"]
     
+    var gameViewController : HSGameViewController!
+    var leaderboardViewController : HSLeaderboardTableViewController!
+    var settingsViewController : HSSettingsTableViewController!
+    
     /// Reference to the current container view controller
     var menuContainer : UIViewController!
 }
@@ -50,8 +54,10 @@ extension HSMenuViewController : UITableViewDelegate {
                 break
             }
             else {
-                let gameController = self.storyboard?.instantiateViewControllerWithIdentifier("HSGameViewController") as! HSGameViewController
-                HSSideBarDelegateStore.delegate?.toggleSideBar(gameController)
+                if gameViewController == nil {
+                    gameViewController = self.storyboard?.instantiateViewControllerWithIdentifier("HSGameViewController") as! HSGameViewController
+                }
+                HSSideBarDelegateStore.delegate?.toggleSideBar(gameViewController)
             }
             
             
@@ -61,8 +67,10 @@ extension HSMenuViewController : UITableViewDelegate {
                 break
             }
             else {
-                let leaderboardController = self.storyboard?.instantiateViewControllerWithIdentifier("HSLeaderboardTableViewController") as! HSLeaderboardTableViewController
-                HSSideBarDelegateStore.delegate?.toggleSideBar(leaderboardController)
+                if leaderboardViewController == nil {
+                    leaderboardViewController = self.storyboard?.instantiateViewControllerWithIdentifier("HSLeaderboardTableViewController") as! HSLeaderboardTableViewController
+                }
+                HSSideBarDelegateStore.delegate?.toggleSideBar(leaderboardViewController)
             }
             
             
@@ -72,8 +80,10 @@ extension HSMenuViewController : UITableViewDelegate {
                 break
             }
             else {
-                let settingsController = self.storyboard?.instantiateViewControllerWithIdentifier("HSSettingsTableViewController") as! HSSettingsTableViewController
-                HSSideBarDelegateStore.delegate?.toggleSideBar(settingsController)
+                if settingsViewController == nil {
+                    settingsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("HSSettingsTableViewController") as! HSSettingsTableViewController
+                }
+                HSSideBarDelegateStore.delegate?.toggleSideBar(settingsViewController)
             }
         }
     }

@@ -29,6 +29,17 @@ class HSContainerViewController: UIViewController {
     
     var menuViewController : HSMenuViewController!
     
+    /** 
+     For the side bar to work correctly, the menu view controller has
+     to be added and removed from the view, each time this happens
+     the variable is set to nil.
+    
+     This variable is to store the menu controller so it can be
+     re-initalised to the same state each time
+    */
+    var menuViewControllerCopy : HSMenuViewController!
+    
+    
     let menuPanelExpandedOffset: CGFloat = 60
 
     override func viewDidLoad() {
@@ -39,6 +50,15 @@ class HSContainerViewController: UIViewController {
         
         containerNavigationController = UINavigationController(rootViewController: currentViewController)
         view.addSubview(containerNavigationController.view)
+        
+        // Initalise the menu to set the game view controller
+        menuViewController = self.storyboard?.instantiateViewControllerWithIdentifier("HSMenuViewController") as! HSMenuViewController
+        
+        menuViewController.gameViewController = currentViewController as! HSGameViewController
+        
+        // Set the copy
+        menuViewControllerCopy = menuViewController
+        menuViewController = nil
         
         containerNavigationController.didMoveToParentViewController(self)
     }
@@ -81,7 +101,14 @@ extension HSContainerViewController: HSSideBarDelegate {
     
     func addLeftPanelViewController(sender: UIViewController) {
         if (menuViewController == nil) {
-            menuViewController = self.storyboard?.instantiateViewControllerWithIdentifier("HSMenuViewController") as! HSMenuViewController
+            
+            if menuViewControllerCopy == nil {
+                menuViewController = self.storyboard?.instantiateViewControllerWithIdentifier("HSMenuViewController") as! HSMenuViewController
+            }
+            else {
+                menuViewController = menuViewControllerCopy
+            }
+            
             
             // Set reference to the current view controller for the menu to use
             menuViewController.menuContainer = sender
@@ -108,6 +135,9 @@ extension HSContainerViewController: HSSideBarDelegate {
         else {
             animateCenterPanelXPosition(targetPosition: 0, completion: { (finished) -> Void in
                 self.currentState = .Collapsed
+                
+                // Save the menu before removing
+                self.menuViewControllerCopy = self.menuViewController
                 
                 self.menuViewController!.view.removeFromSuperview()
                 self.menuViewController = nil

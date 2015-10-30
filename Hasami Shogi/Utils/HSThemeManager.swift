@@ -42,4 +42,11 @@ class HSThemeManager: NSObject {
     static func blueCounterColor() -> UIColor {
         return UIColor(red: 46/255.0, green: 124/255.0, blue: 172/255.0, alpha: 1.0)
     }
+    
+    /**
+     - returns: The default user image if a user doesn't include one
+     */
+    static func defaultUserImage() -> UIImage {
+        return UIImage(named: "Default User Image")!
+    }
 }

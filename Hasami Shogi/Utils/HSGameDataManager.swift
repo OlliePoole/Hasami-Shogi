@@ -32,8 +32,8 @@ class HSGameDataManager: NSObject {
      - returns: The two created users
      */
     static func createDummyUsersForFirstLaunch() -> (playerOne: User, playerTwo: User) {
-        let playerOne = HSGameDataManager.createUserWith("Player One", bio: "Player one bio", profileImage: nil, isDefaultUser: true)
-        let playerTwo = HSGameDataManager.createUserWith("Player Two", bio: "Player two bio", profileImage: nil, isDefaultUser: true)
+        let playerOne = HSGameDataManager.createUserWith("Player One", bio: "Player one bio", profileImage: HSThemeManager.defaultUserImage(), isDefaultUser: true)
+        let playerTwo = HSGameDataManager.createUserWith("Player Two", bio: "Player two bio", profileImage: HSThemeManager.defaultUserImage(), isDefaultUser: true)
         
         return (playerOne!, playerTwo!)
     }
@@ -107,12 +107,12 @@ class HSGameDataManager: NSObject {
     
     - returns: The newly created User object, returns nil if save failed
     */
-    static func createUserWith(userName: String, bio: String, profileImage: UIImage?, isDefaultUser: Bool) -> User? {
+    static func createUserWith(userName: String, bio: String, profileImage: UIImage, isDefaultUser: Bool) -> User? {
         
         let user = HSCoreDataAccess.createUserEntity() as! User
         user.username = userName
         user.bio = bio
-        //user.profileImage = profileImage //TODO: Fix this
+        user.imageData = UIImagePNGRepresentation(profileImage)
         user.isDefault = isDefaultUser
         
         if HSCoreDataAccess.saveContext() {

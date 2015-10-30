@@ -24,6 +24,7 @@ extension HSGameViewController: HSGameBoardViewControllerDelegate {
         return gameBoard.collectionView.cellForItemAtIndexPath(NSIndexPath(forRow: atRow, inSection: inSection)) as! HSGameBoardCollectionViewCell
     }
     
+    
     func gameBoard(gameBoard: HSGameBoardViewController, canMovePieceFrom startIndex: NSIndexPath, to endIndex: NSIndexPath) -> Bool! {
         
         if startIndex == endIndex {
@@ -204,8 +205,11 @@ extension HSGameViewController: HSGameBoardViewControllerDelegate {
             
         }
         
-        // Return true if either player only have one counter remaining
-        return playerOneInfo.countersRemaining == HSGameConstants.numberOfPiecesToWin || playerTwoInfo.countersRemaining == HSGameConstants.numberOfPiecesToWin
+        // Return based on how many counters are needed to win
+        let playerOneWon = HSGameConstants.numberOfPiecesPerPlayer - playerOneInfo.countersRemaining >= HSGameConstants.numberOfPiecesToWin
+        let playerTwoWon = HSGameConstants.numberOfPiecesPerPlayer - playerTwoInfo.countersRemaining >= HSGameConstants.numberOfPiecesToWin
+        
+        return playerOneWon || playerTwoWon
     }
     
     func showNewGameDialogWithBoard(gameBoard: HSGameBoardViewController) {

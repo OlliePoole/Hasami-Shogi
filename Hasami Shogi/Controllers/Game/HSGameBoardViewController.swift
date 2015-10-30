@@ -241,27 +241,26 @@ extension HSGameBoardViewController : UICollectionViewDelegate {
             if canMakeMove! {
                 moveCounterFromLocation(currentSelectedIndexPath, to: indexPath)
                 
-                // update the player
-                currentPlayer = currentPlayer == .PlayerOne ? .PlayerTwo : .PlayerOne
-                
                 // Check for death
                 let deathCheck = delegate?.gameBoard(self, checkForDeathAt: indexPath)
                 
-                if deathCheck?.count == 0 {
-                    return
+                if deathCheck?.count != 0 {
+                    
+                    // Remove the dead counters
+                    for deathIndex in deathCheck! {
+                        indicateDeathAt(deathIndex)
+                    }
+                    
+                    // Now we know a counter has been captured, check if the game is finished
+                    let gameFinished = delegate?.gameBoard(self, checkForWinningConditionsWith: playerOneInfo, playerTwoInfo: playerTwoInfo, lastMove: indexPath)
+                    
+                    if gameFinished! {
+                        indicateGameFinishedWith(currentPlayer)
+                    }
                 }
                 
-                // Remove the dead counters
-                for deathIndex in deathCheck! {
-                    indicateDeathAt(deathIndex)
-                }
-                
-                // Now we know a counter has been captured, check if the game is finished
-                let gameFinished = delegate?.gameBoard(self, checkForWinningConditionsWith: playerOneInfo, playerTwoInfo: playerTwoInfo, lastMove: indexPath)
-                
-                if gameFinished! {
-                    indicateGameFinishedWith(currentPlayer)
-                }
+                // update the player
+                currentPlayer = currentPlayer == .PlayerOne ? .PlayerTwo : .PlayerOne
             }
             else {
                 // Highlight end cell with error

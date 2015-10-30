@@ -47,7 +47,7 @@ class HSGameConstants: NSObject {
     }
     
     
-    /// The number of pieces required to win a game
+    /// The number of counters that need to be taken to win a game
     static var numberOfPiecesToWin : Int {
         get {
             return NSUserDefaults.standardUserDefaults().integerForKey("PiecesToWin")

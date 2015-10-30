@@ -16,11 +16,15 @@ class User: NSManagedObject {
     @NSManaged var bio: String?
     @NSManaged var points: NSNumber?
     @NSManaged var isDefault: NSNumber?
+    @NSManaged var imageData: NSData?
     
-    var profileImage : UIImage {
+    var profileImage : UIImage? {
         get {
-            return UIImage(named: "Homer Simpson")!
+            if let _ = imageData {
+                return UIImage(data: imageData!)
+            }
+            // else
+            return nil
         }
     }
-    
 }
