@@ -46,6 +46,9 @@ extension HSMenuViewController : UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        // Remove the selection indicator
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
         switch indexPath.section {
             
         case 0: // Game

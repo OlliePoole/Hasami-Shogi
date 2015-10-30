@@ -20,7 +20,6 @@ class HSGameConstants: NSObject {
     static var numberOfRows = 9
     static var numberOfSections = 9
     
-    
     /// The type of game to be played
     static var gameType : GameType {
         get {
@@ -33,7 +32,11 @@ class HSGameConstants: NSObject {
     
     
     /// If the current game type is HasamiShogi, return 9. If the game type is Dia Hasami Shogi return 18
-    static var numberOfPiecesPerPlayer = HSGameConstants.gameType == .HasamiShogi ? 9 : 18
+    static var numberOfPiecesPerPlayer : Int{
+        get {
+            return HSGameConstants.gameType == .HasamiShogi ? 9 : 18
+        }
+    }
     
     
     /// In the Dia Hasami Shogi variant, if a line of pieces wins the game

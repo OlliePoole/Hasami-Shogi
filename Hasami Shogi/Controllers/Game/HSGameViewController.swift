@@ -23,7 +23,48 @@ class HSGameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        gameBoardViewController = childViewControllers.first as! HSGameBoardViewController
+        setupGame()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Check if any moves have been made
+        if gameBoardViewController == nil {
+            gameBoardViewController = childViewControllers.first as! HSGameBoardViewController
+        }
+        
+        // if the user hasn't made any moves, restart the game
+        if !gameBoardViewController.hasMadeFirstMove {
+            setupGame()
+        }
+    }
+    
+    @IBAction func menuButtonPressed(sender: AnyObject) {
+        HSSideBarDelegateStore.delegate?.toggleSideBar(self)
+    }
+    
+    @IBAction func restartGameButtonPressed(sender: AnyObject) {
+        let gameBoard = childViewControllers.first as! HSGameBoardViewController
+        
+        gameBoard.shouldRestartGame()
+    }
+    
+    @IBAction func newGameButtonPressed(sender: AnyObject) {
+        let newGameViewController = storyboard?.instantiateViewControllerWithIdentifier("HSNewGameViewController") as! HSNewGameViewController
+        newGameViewController.delegate = self
+        
+        // embed new game controller in nav controller
+        let navController = UINavigationController(rootViewController: newGameViewController)
+    
+        presentViewController(navController, animated: true, completion: nil)
+    }
+    
+    func setupGame() {
+        
+        if gameBoardViewController == nil {
+            gameBoardViewController = childViewControllers.first as! HSGameBoardViewController
+        }
         
         gameBoardViewController.delegate = self
         
@@ -46,26 +87,6 @@ class HSGameViewController: UIViewController {
         
         // Start a new game with the players
         gameBoardViewController.shouldStartNewGameWithPlayerOne(players.playerOne, andPlayerTwo: players.playerTwo)
-    }
-    
-    @IBAction func menuButtonPressed(sender: AnyObject) {
-        HSSideBarDelegateStore.delegate?.toggleSideBar(self)
-    }
-    
-    @IBAction func restartGameButtonPressed(sender: AnyObject) {
-        let gameBoard = childViewControllers.first as! HSGameBoardViewController
-        
-        gameBoard.shouldRestartGame()
-    }
-    
-    @IBAction func newGameButtonPressed(sender: AnyObject) {
-        let newGameViewController = storyboard?.instantiateViewControllerWithIdentifier("HSNewGameViewController") as! HSNewGameViewController
-        newGameViewController.delegate = self
-        
-        // embed new game controller in nav controller
-        let navController = UINavigationController(rootViewController: newGameViewController)
-    
-        presentViewController(navController, animated: true, completion: nil)
     }
 }
 

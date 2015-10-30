@@ -17,6 +17,7 @@
 		6B3731551BC92B1C0098C872 /* SanFranciscoText-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6B3731541BC927A20098C872 /* SanFranciscoText-Light.otf */; };
 		6B3731561BC92B200098C872 /* SanFranciscoText-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6B3731531BC927960098C872 /* SanFranciscoText-Bold.otf */; };
 		6B5B20411BE295CE00C8E65B /* Hasami_Shogi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6B5B203E1BE295CE00C8E65B /* Hasami_Shogi.xcdatamodeld */; };
+		6B614C431BE3D8EF005D1F39 /* HSGameLogicDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B614C421BE3D8EF005D1F39 /* HSGameLogicDelegate.swift */; };
 		6B80BF661BB466D50017DD79 /* HSGameConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B80BF651BB466D50017DD79 /* HSGameConstants.swift */; };
 		6B9420E01BCAF8D100DE51AD /* HSLeaderboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9420DF1BCAF8D100DE51AD /* HSLeaderboardTableViewCell.swift */; };
 		6BA100C01BC52F8B009A2F56 /* HSGameBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA100BF1BC52F8B009A2F56 /* HSGameBoardViewController.swift */; };
@@ -68,6 +69,7 @@
 		6B3731541BC927A20098C872 /* SanFranciscoText-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SanFranciscoText-Light.otf"; sourceTree = "<group>"; };
 		6B5B203F1BE295CE00C8E65B /* Hasami_Shogi v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Hasami_Shogi v2.xcdatamodel"; sourceTree = "<group>"; };
 		6B5B20401BE295CE00C8E65B /* Hasami_Shogi.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Hasami_Shogi.xcdatamodel; sourceTree = "<group>"; };
+		6B614C421BE3D8EF005D1F39 /* HSGameLogicDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSGameLogicDelegate.swift; sourceTree = "<group>"; };
 		6B80BF651BB466D50017DD79 /* HSGameConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HSGameConstants.swift; path = "Hasami Shogi/Utils/HSGameConstants.swift"; sourceTree = SOURCE_ROOT; };
 		6B9420DF1BCAF8D100DE51AD /* HSLeaderboardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSLeaderboardTableViewCell.swift; sourceTree = "<group>"; };
 		6BA100BF1BC52F8B009A2F56 /* HSGameBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSGameBoardViewController.swift; sourceTree = "<group>"; };
@@ -91,7 +93,7 @@
 		6BCF11321BB3324100066186 /* HSLeaderboardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSLeaderboardTableViewController.swift; sourceTree = "<group>"; };
 		6BCF11341BB3341A00066186 /* HSSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSSettingsTableViewController.swift; sourceTree = "<group>"; };
 		6BD188541BCBE9D80094EC9C /* SanFranciscoText-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SanFranciscoText-Regular.otf"; sourceTree = "<group>"; };
-		6BDD3E881BE2C1CC0003CAFC /* HGameViewController+GameLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HGameViewController+GameLogic.swift"; sourceTree = "<group>"; };
+		6BDD3E881BE2C1CC0003CAFC /* HGameViewController+GameLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "HGameViewController+GameLogic.swift"; path = "../HGameViewController+GameLogic.swift"; sourceTree = "<group>"; };
 		6BF2EEED1BB45FB5008A6D5E /* HSGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSGameViewController.swift; sourceTree = "<group>"; };
 		6BF55D271BB6B08D0050497B /* HSGameDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSGameDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,6 +123,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B614C411BE3D88A005D1F39 /* Game Logic */ = {
+			isa = PBXGroup;
+			children = (
+				6BDD3E881BE2C1CC0003CAFC /* HGameViewController+GameLogic.swift */,
+				6B614C421BE3D8EF005D1F39 /* HSGameLogicDelegate.swift */,
+			);
+			path = "Game Logic";
+			sourceTree = "<group>";
+		};
 		6B80BF641BB466A60017DD79 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,7 +150,7 @@
 				6BCF11301BB331E700066186 /* HSNewGameViewController.swift */,
 				6BA135CF1BCA66A40016ADA1 /* HSRegisterUserTableViewController.swift */,
 			);
-			name = "New Game";
+			path = "New Game";
 			sourceTree = "<group>";
 		};
 		6BCF10E51BB31D4600066186 = {
@@ -259,10 +270,10 @@
 		6BD5BD4D1BB86470004ABEDB /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				6B614C411BE3D88A005D1F39 /* Game Logic */,
 				6BA135CE1BCA66600016ADA1 /* New Game */,
 				6BA100BF1BC52F8B009A2F56 /* HSGameBoardViewController.swift */,
 				6BF2EEED1BB45FB5008A6D5E /* HSGameViewController.swift */,
-				6BDD3E881BE2C1CC0003CAFC /* HGameViewController+GameLogic.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -431,6 +442,7 @@
 				6B5B20411BE295CE00C8E65B /* Hasami_Shogi.xcdatamodeld in Sources */,
 				6B80BF661BB466D50017DD79 /* HSGameConstants.swift in Sources */,
 				6BF55D281BB6B08D0050497B /* HSGameDataManager.swift in Sources */,
+				6B614C431BE3D8EF005D1F39 /* HSGameLogicDelegate.swift in Sources */,
 				6BC76BC71BCAC228005F3C40 /* HSUserProfileViewController.swift in Sources */,
 				6B0009ED1BC4009200CC1B65 /* HSContainerViewController.swift in Sources */,
 				6BCF11311BB331E700066186 /* HSNewGameViewController.swift in Sources */,

@@ -8,14 +8,6 @@
 
 import UIKit
 
-protocol HSGameBoardViewControllerDelegate {
-    func gameBoard(gameBoard : HSGameBoardViewController, canMovePieceFrom startIndex: NSIndexPath, to endIndex: NSIndexPath) -> Bool!
-    func gameBoard(gameBoard : HSGameBoardViewController, checkForDeathAt currentIndex: NSIndexPath) -> [NSIndexPath]?
-    func gameBoard(gameBoard : HSGameBoardViewController, checkIfCellAtIndex startIndex: NSIndexPath, hasTheSameOwnerAsCellAt endIndex: NSIndexPath) -> Bool!
-    func gameBoard(gameBoard : HSGameBoardViewController, checkForWinningConditionsWith playerOneInfo: PlayerInfo, playerTwoInfo: PlayerInfo, lastMove indexPath: NSIndexPath) -> Bool!
-    func showNewGameDialogWithBoard(gameBoard : HSGameBoardViewController)
-}
-
 enum Player {
     case PlayerOne // Red Counters
     case PlayerTwo // Blue Counters
@@ -29,7 +21,7 @@ struct PlayerInfo {
 /// Responsible for displaying and updating the game board
 class HSGameBoardViewController: UIViewController {
     
-    var delegate : HSGameBoardViewControllerDelegate!
+    var delegate : HSGameLogicDelegate!
     
     var hasMadeFirstMove : Bool = false
     
@@ -239,6 +231,9 @@ extension HSGameBoardViewController : UICollectionViewDelegate {
             let canMakeMove = delegate?.gameBoard(self, canMovePieceFrom: currentSelectedIndexPath, to: indexPath)
             
             if canMakeMove! {
+                // Set as made first move
+                hasMadeFirstMove = true
+                
                 moveCounterFromLocation(currentSelectedIndexPath, to: indexPath)
                 
                 // Check for death
@@ -337,6 +332,4 @@ extension HSGameBoardViewController : UICollectionViewDataSource {
         
         return CGSizeMake(cellWidth - 1, cellWidth - 1)
     }
-    
-    
 }
