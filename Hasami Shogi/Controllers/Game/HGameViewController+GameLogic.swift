@@ -9,70 +9,8 @@
 import UIKit
 import Foundation
 
-// MARK: - HSGameViewController extention
-extension HSGameViewController {
-    // Extend the HSGameView Controller to add extra functionality, specific to game board logic operations
-    
-    enum CheckingState {
-        case North, NorthEast, East, SouthEast, South, SouthWest, West, NorthWest
-    }
-    
-    /**
-     - parameter indexPath: The index path of the cell to check
-     - parameter gameBoard: The game board where the request origininated
-     
-     - returns: The current cell state of a specified cell
-     */
-    func cellStateAtIndexPath(indexPath: NSIndexPath, on gameBoard: HSGameBoardViewController) -> CellState {
-        let cell = gameBoard.collectionView.cellForItemAtIndexPath(indexPath) as! HSGameBoardCollectionViewCell
-        
-        return cell.currentState
-    }
-    
-    
-    /**
-     Checks the current boundaries, to ensure that the next cell selected isn't out of bounds
-     
-     - parameter indexPath:     The indexpath of the next cell to be checked
-     - parameter checkingState: The position of the cell in respect to the previous cell
-     
-     - returns: True, if the next cell is not out of bounds
-     */
-    func checkGameBoardBoundariesAtIndex(indexPath: NSIndexPath, withCurrentCheck checkingState: CheckingState) -> Bool! {
-        switch checkingState {
-        case .North: return indexPath.section > 0
-        case .South: return indexPath.section < HSGameConstants.numberOfSections
-        case .West: return indexPath.row > 0
-        case .East: return indexPath.row < HSGameConstants.numberOfRows
-        
-        case .NorthEast: return indexPath.section > 0 && indexPath.row < HSGameConstants.numberOfRows
-        case .SouthEast: return indexPath.section < HSGameConstants.numberOfSections && indexPath.row < HSGameConstants.numberOfRows
-        case .SouthWest: return indexPath.section < HSGameConstants.numberOfSections && indexPath.row > 0
-        case .NorthWest: return indexPath.section > 0 && indexPath.row > 0
-        }
-    }
-    
-    
-    /**
-     - parameter currentIndexPath: The index path of the cell currently being checked
-     - parameter checkingState:    The position of the next cell with respect to the current cell
-     
-     - returns: The index path of the next cell to check
-     */
-    func nextIndexPath(currentIndexPath: NSIndexPath, withCurrentCheck checkingState: CheckingState) -> NSIndexPath {
-        
-        switch checkingState {
-        case .North: return NSIndexPath(forRow: currentIndexPath.row, inSection: currentIndexPath.section - 1)
-        case .South: return NSIndexPath(forRow: currentIndexPath.row, inSection: currentIndexPath.section + 1)
-        case .West: return NSIndexPath(forRow: currentIndexPath.row - 1, inSection: currentIndexPath.section)
-        case .East: return NSIndexPath(forRow: currentIndexPath.row + 1, inSection: currentIndexPath.section)
-            
-        case .NorthEast: return NSIndexPath(forRow: currentIndexPath.row + 1, inSection: currentIndexPath.section - 1)
-        case .SouthEast: return NSIndexPath(forRow: currentIndexPath.row + 1, inSection: currentIndexPath.section + 1)
-        case .SouthWest: return NSIndexPath(forRow: currentIndexPath.row - 1, inSection: currentIndexPath.section + 1)
-        case .NorthWest: return NSIndexPath(forRow: currentIndexPath.row - 1, inSection: currentIndexPath.section + 1)
-        }
-    }
+enum CheckingState {
+    case North, NorthEast, East, SouthEast, South, SouthWest, West, NorthWest
 }
 
 // MARK: - HSGameBoardViewControllerDelegate
@@ -178,44 +116,51 @@ extension HSGameViewController: HSGameLogicDelegate {
         }
     }
     
-    func gameBoard(gameBoard: HSGameBoardViewController, checkForDeathAt currentIndex: NSIndexPath) -> [NSIndexPath]? {
+    func gameBoard(gameBoard: HSGameBoardViewController, checkForDeathAt currentIndex: NSIndexPath, currentPlayer player: Player) -> [NSIndexPath]? {
         
-        let checksToMake = [CheckingState.North, .South, .West, .East]
+        var checksToMake = [CheckingState.North, .South, .West, .East]
         var deathIndexPaths = [NSIndexPath]()
         
-        for currentCheck in checksToMake {
+        let friendlyCellState = player == .PlayerOne ? CellState.RedCounter : CellState.BlueCounter
+        var shouldLoop = true
+        
+        while shouldLoop && checksToMake.count > 0 {
             
-            var nextCellIndex = nextIndexPath(currentIndex, withCurrentCheck: currentCheck)
+            let currentCheck = checksToMake.removeFirst()
             
-            while checkGameBoardBoundariesAtIndex(nextCellIndex, withCurrentCheck: currentCheck)! {
-                
-                // What is the state of the next cell?
-                let cellState = cellStateAtIndexPath(nextCellIndex, on: gameBoard)
-                
-                // If it's empty we can stop checking
-                if cellState == .Empty {
-                    deathIndexPaths = [NSIndexPath]()
-                    break
-                }
-                
-                // If the cell has a different owner to the current cell
-                if self.gameBoard(gameBoard, checkIfCellAtIndex: nextCellIndex, hasTheSameOwnerAsCellAt: currentIndex) == false {
-                    // Yes it does, add to deathIndexPaths
-                    deathIndexPaths.append(nextCellIndex)
-                } else {
-                    // We've found a friendly counter, return from funtion
-                    return deathIndexPaths
-                }
-                
-                nextCellIndex = nextIndexPath(nextCellIndex, withCurrentCheck: currentCheck)
+            let counterIterator = GameBoardCounterIterator(gameBoard: gameBoard, currentCheck: currentCheck, friendlyCellState: friendlyCellState)
+            
+            /**
+            *  Empty cell found, reset the death indexs and stop iterating
+            */
+            counterIterator.emptyCellAction = { (indexPath) -> Void in
+                deathIndexPaths = [NSIndexPath]()
+                counterIterator.stopIterating()
             }
+            
+            /**
+            *  An enemy cell has been found, add the index to the death array
+            */
+            counterIterator.enemyCellAction = { (indexPath) -> Void in
+                deathIndexPaths.append(indexPath)
+            }
+            
+            /**
+            *  When a friendly cell is found, stop iterating and stop looping so the function can return
+            */
+            counterIterator.friendlyCellAction = { (indexPath) -> Void in
+                counterIterator.stopIterating()
+                shouldLoop = false
+            }
+            
+            counterIterator.iterate(currentIndex)
         }
         
         // All checks have been made
         return deathIndexPaths
     }
     
-    func gameBoard(gameBoard: HSGameBoardViewController, checkForWinningConditionsWith playerOneInfo: PlayerInfo, playerTwoInfo: PlayerInfo, lastMove indexPath: NSIndexPath) -> Bool! {
+    func gameBoard(gameBoard: HSGameBoardViewController, checkForWinningConditionsWith playerOneInfo: PlayerInfo, playerTwoInfo: PlayerInfo) -> Bool! {
         
         // Return based on how many counters are needed to win
         let playerOneWon = HSGameConstants.numberOfPiecesPerPlayer - playerOneInfo.countersRemaining >= HSGameConstants.numberOfPiecesToWin
@@ -225,78 +170,100 @@ extension HSGameViewController: HSGameLogicDelegate {
         return playerOneWon || playerTwoWon
     }
     
-    func gameBoard(gameBoard: HSGameBoardViewController, checkForFiveInARowWinningConditionsWithLastMove lastMove: NSIndexPath, andPlayerHomeSection section: Int) -> Bool! {
+    func gameBoard(gameBoard: HSGameBoardViewController, checkForFiveInARowWinningConditionsWithLastMove lastMove: NSIndexPath, andPlayerHomeSections sections: [Int], currentPlayer player: Player) -> Bool! {
+        
+        var gameWon : Bool = false
         
         // If line to win
         if HSGameConstants.lineToWin {
             
+            // Check to ensure the move isn't in the user's home location
+            if sections.contains(lastMove.section) {
+                return false
+            }
+            
             let checksToMake = [(CheckingState.North, CheckingState.South), (.East, .West), (.NorthEast, .SouthWest), (.NorthWest, .SouthEast)]
-            var counterCount = 0 // If there are 5 counters in row, the game is over
+            var counterCount = 1 // If there are 5 counters in row, the game is over
+            let friendlyCellState = player == .PlayerOne ? CellState.RedCounter : CellState.BlueCounter
+            
             
             // For each current check and it's opposite partner
             for (currentCheck, partnerCurrentCheck) in checksToMake {
                 
-                // Find the next cell to check
-                var nextCellIndex = nextIndexPath(lastMove, withCurrentCheck: currentCheck)
+                let counterIterator = GameBoardCounterIterator(gameBoard: gameBoard, currentCheck: currentCheck, friendlyCellState: friendlyCellState)
                 
-                // While the next cell is not out of the game boundaries
-                while checkGameBoardBoundariesAtIndex(nextCellIndex, withCurrentCheck: currentCheck)! {
+                /**
+                *  Found an enemy counter, stop iterating
+                */
+                counterIterator.enemyCellAction = { (indexPath) -> Void in
+                    // Found an enemy cell, stop iterating
+                    counterIterator.stopIterating()
+                }
+                
+                
+                /**
+                *  Found a friendly counter, increment the counter and check for winning conditions
+                */
+                counterIterator.friendlyCellAction = { (indexPath) -> Void in
+                    counterCount++
                     
-                    // What is the state of the next cell?
-                    var cellState = cellStateAtIndexPath(nextCellIndex, on: gameBoard)
-                    
-                    // Is it empty?
-                    if cellState == .Empty {
-                        // Check in the opposite direction
-                        
-                        nextCellIndex = nextIndexPath(nextCellIndex, withCurrentCheck: partnerCurrentCheck)
-                        
-                        while checkGameBoardBoundariesAtIndex(nextCellIndex, withCurrentCheck: partnerCurrentCheck)! {
-                            
-                            // What is the state of the next cell?
-                            cellState = cellStateAtIndexPath(nextCellIndex, on: gameBoard)
-                            
-                            if cellState == .Empty {
-                                counterCount = 0
-                                break
-                            }
-                            else {
-                                // if the next cell has the same owner as the current cell
-                                if self.gameBoard(gameBoard, checkIfCellAtIndex: nextCellIndex, hasTheSameOwnerAsCellAt: lastMove)! {
-                                    counterCount++
-                                    
-                                    if counterCount == 5 {
-                                        return true
-                                    }
-                                }
-                                else {
-                                    break
-                                }
-                            }
-                            nextCellIndex = nextIndexPath(nextCellIndex, withCurrentCheck: currentCheck)
-                        }
-                    }
-                    else {
-                        
-                        // if the next cell has the same owner as the current cell
-                        if self.gameBoard(gameBoard, checkIfCellAtIndex: nextCellIndex, hasTheSameOwnerAsCellAt: lastMove)! {
-                            counterCount++
-                            
-                            if counterCount == 5 {
-                                return true
-                            }
-                        }
-                        else {
-                            break
-                        }
-                        
-                        nextCellIndex = nextIndexPath(nextCellIndex, withCurrentCheck: currentCheck)
+                    if counterCount == 5 {
+                        gameWon = true
+                        counterIterator.stopIterating()
                     }
                 }
+                
+                
+                /**
+                *  Empty cell found, start new iterator to iterate in the opposite(partner) direction
+                */
+                counterIterator.emptyCellAction = { (indexPath) -> Void in
+                    
+                    let counterIterator = GameBoardCounterIterator(gameBoard: gameBoard, currentCheck: partnerCurrentCheck, friendlyCellState: friendlyCellState)
+                    
+                    /**
+                    *  Empty cell found, reset the counter, stop iterating
+                    */
+                    counterIterator.emptyCellAction = { (indexPath) -> Void in
+                        counterCount = 1
+                        counterIterator.stopIterating()
+                    }
+                    
+                    
+                    /**
+                    *  Friendly counter found, increment the counter, check for winning conditions
+                    */
+                    counterIterator.friendlyCellAction = { (indexPath) -> Void in
+                        
+                        if !sections.contains(indexPath.section) {
+                            counterCount++
+                        }
+                        
+                        if counterCount == 5 {
+                            gameWon = true
+                            counterIterator.stopIterating()
+                        }
+                    }
+                    
+                    
+                    /**
+                    *  Enemy counter found, stop iterating
+                    */
+                    counterIterator.enemyCellAction = { (indexPath) -> Void in
+                        // Found an enemy cell, stop iterating
+                        counterIterator.stopIterating()
+                    }
+                    
+                    counterIterator.iterate(lastMove)
+                }
+                
+                counterIterator.iterate(lastMove)
             }
         }
-        return false
+    
+        return gameWon
     }
+    
     
     func showNewGameDialogWithBoard(gameBoard: HSGameBoardViewController) {
         let newGameViewController = storyboard?.instantiateViewControllerWithIdentifier("HSNewGameViewController") as! HSNewGameViewController

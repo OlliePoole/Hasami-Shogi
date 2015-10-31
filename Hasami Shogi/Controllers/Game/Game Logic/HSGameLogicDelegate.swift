@@ -28,10 +28,11 @@ protocol HSGameLogicDelegate {
      
      - parameter gameBoard:    The board
      - parameter currentIndex: The current index of the counter after it's move operation
+     - parameter player:       The player who just completed the move
      
      - returns: An array of index paths, where each index path is the location of a counter that has died
      */
-    func gameBoard(gameBoard : HSGameBoardViewController, checkForDeathAt currentIndex: NSIndexPath) -> [NSIndexPath]?
+    func gameBoard(gameBoard : HSGameBoardViewController, checkForDeathAt currentIndex: NSIndexPath, currentPlayer player: Player) -> [NSIndexPath]?
     
     
     /**
@@ -65,11 +66,12 @@ protocol HSGameLogicDelegate {
      
      - parameter gameBoard: The game board
      - parameter lastMove:  The end location of the last move that was made
-     - parameter sections:   The section(s) of the starting location(s) of the current player
+     - parameter sections:  The section(s) of the starting location(s) of the current player
+     - parameter player:    The player who just completed the move
      
      - returns: True, if the win conditions have been met
      */
-    func gameBoard(gameBoard : HSGameBoardViewController, checkForFiveInARowWinningConditionsWithLastMove lastMove: NSIndexPath, andPlayerHomeSections sections: [Int]) -> Bool!
+    func gameBoard(gameBoard : HSGameBoardViewController, checkForFiveInARowWinningConditionsWithLastMove lastMove: NSIndexPath, andPlayerHomeSections sections: [Int], currentPlayer player: Player) -> Bool!
     
     
     /**

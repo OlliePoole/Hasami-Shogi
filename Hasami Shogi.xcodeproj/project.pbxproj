@@ -23,6 +23,7 @@
 		6BA100C01BC52F8B009A2F56 /* HSGameBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA100BF1BC52F8B009A2F56 /* HSGameBoardViewController.swift */; };
 		6BA100C21BC538B7009A2F56 /* HSGameBoardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA100C11BC538B7009A2F56 /* HSGameBoardCollectionViewCell.swift */; };
 		6BA135D01BCA66A40016ADA1 /* HSRegisterUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA135CF1BCA66A40016ADA1 /* HSRegisterUserTableViewController.swift */; };
+		6BC300411BE4FC560034CF49 /* GameBoardCounterIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC300401BE4FC560034CF49 /* GameBoardCounterIterator.swift */; };
 		6BC76BC71BCAC228005F3C40 /* HSUserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC76BC61BCAC228005F3C40 /* HSUserProfileViewController.swift */; };
 		6BCF10F21BB31D4600066186 /* HSAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCF10F11BB31D4600066186 /* HSAppDelegate.swift */; };
 		6BCF10FC1BB31D4600066186 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BCF10FB1BB31D4600066186 /* Assets.xcassets */; };
@@ -75,6 +76,7 @@
 		6BA100BF1BC52F8B009A2F56 /* HSGameBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSGameBoardViewController.swift; sourceTree = "<group>"; };
 		6BA100C11BC538B7009A2F56 /* HSGameBoardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSGameBoardCollectionViewCell.swift; sourceTree = "<group>"; };
 		6BA135CF1BCA66A40016ADA1 /* HSRegisterUserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSRegisterUserTableViewController.swift; sourceTree = "<group>"; };
+		6BC300401BE4FC560034CF49 /* GameBoardCounterIterator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoardCounterIterator.swift; sourceTree = "<group>"; };
 		6BC76BC61BCAC228005F3C40 /* HSUserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSUserProfileViewController.swift; sourceTree = "<group>"; };
 		6BCF10EE1BB31D4600066186 /* Hasami Shogi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hasami Shogi.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BCF10F11BB31D4600066186 /* HSAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSAppDelegate.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 		6B80BF641BB466A60017DD79 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				6BC300401BE4FC560034CF49 /* GameBoardCounterIterator.swift */,
 				6B80BF651BB466D50017DD79 /* HSGameConstants.swift */,
 				6B0034EF1BB54D5100963FD6 /* HSCoreDataAccess.swift */,
 				6BF55D271BB6B08D0050497B /* HSGameDataManager.swift */,
@@ -440,6 +443,7 @@
 				6BCF11331BB3324100066186 /* HSLeaderboardTableViewController.swift in Sources */,
 				6B9420E01BCAF8D100DE51AD /* HSLeaderboardTableViewCell.swift in Sources */,
 				6B5B20411BE295CE00C8E65B /* Hasami_Shogi.xcdatamodeld in Sources */,
+				6BC300411BE4FC560034CF49 /* GameBoardCounterIterator.swift in Sources */,
 				6B80BF661BB466D50017DD79 /* HSGameConstants.swift in Sources */,
 				6BF55D281BB6B08D0050497B /* HSGameDataManager.swift in Sources */,
 				6B614C431BE3D8EF005D1F39 /* HSGameLogicDelegate.swift in Sources */,

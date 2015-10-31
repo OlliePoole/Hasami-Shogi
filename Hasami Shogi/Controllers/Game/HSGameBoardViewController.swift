@@ -236,8 +236,26 @@ extension HSGameBoardViewController : UICollectionViewDelegate {
                 
                 moveCounterFromLocation(currentSelectedIndexPath, to: indexPath)
                 
+                // Check if move has met the 5 in-a-row win conditions
+                // Calculate the home sections of the current player to exclude those from the check
+                var homeSections : [Int]
+                
+                if HSGameConstants.gameType == .HasamiShogi {
+                    homeSections = [(currentPlayer == .PlayerOne) ? 0 : HSGameConstants.numberOfSections - 1]
+                }
+                else {
+                    homeSections = [(currentPlayer == .PlayerOne) ? 0 : HSGameConstants.numberOfSections - 1,
+                                    (currentPlayer == .PlayerOne) ? 1 : HSGameConstants.numberOfSections - 2]
+                }
+                
+                let gameFinished = delegate?.gameBoard(self, checkForFiveInARowWinningConditionsWithLastMove: indexPath, andPlayerHomeSections: homeSections, currentPlayer: currentPlayer)
+                
+                if gameFinished! {
+                    indicateGameFinishedWith(currentPlayer)
+                }
+                
                 // Check for death
-                let deathCheck = delegate?.gameBoard(self, checkForDeathAt: indexPath)
+                let deathCheck = delegate?.gameBoard(self, checkForDeathAt: indexPath, currentPlayer: currentPlayer)
                 
                 if deathCheck?.count != 0 {
                     
@@ -247,7 +265,7 @@ extension HSGameBoardViewController : UICollectionViewDelegate {
                     }
                     
                     // Now we know a counter has been captured, check if the game is finished
-                    let gameFinished = delegate?.gameBoard(self, checkForWinningConditionsWith: playerOneInfo, playerTwoInfo: playerTwoInfo, lastMove: indexPath)
+                    let gameFinished = delegate?.gameBoard(self, checkForWinningConditionsWith: playerOneInfo, playerTwoInfo: playerTwoInfo)
                     
                     if gameFinished! {
                         indicateGameFinishedWith(currentPlayer)
